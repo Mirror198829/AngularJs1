@@ -5,6 +5,7 @@
 	<title>AngularJs</title>
   <link rel="icon" href="src/img/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
+ <link rel="stylesheet" href="node_modules/icheck/skins/flat/blue.css" >
   <!-- <link rel="stylesheet" type="text/css" href="node_modules/angular-patternfly/dist/styles/angular-patternfly.min.css"> -->
  <!--  <link rel="stylesheet" type="text/css" href="node_modules/patternfly/dist/css/patternfly.css"> -->
  <!--  <link rel="stylesheet" type="text/css" href="node_modules/patternfly/dist/css/patternfly.min.css"> -->
@@ -21,6 +22,7 @@
 	<!-- <script type="text/javascript" src="node_modules/angular-patternfly/dist/angular-patternfly.js"></script>
   <script type="text/javascript" src="node_modules/patternfly/node_modules/c3/c3.min.js"></script>
   <script type="text/javascript" src="node_modules/patternfly/node_modules/d3/d3.js"></script -->
+  <script type="text/javascript" src="node_modules/icheck/icheck.min.js"></script>
 	<style type="text/css">
 	 #viewContainer,#navcontainer{width: 80%;margin:0 auto;}
    body{overflow-y: scroll}
@@ -110,8 +112,10 @@ app.controller("formCtrl",function($scope){
       }else{
         console.log($scope.userdata);
         alert("提交成功！")
-      }
-      
+      }      
+   };
+   $scope.resetForm=function(){
+     location.reload(); 
    }
 });
 app.directive("compare",function(){
@@ -128,6 +132,36 @@ app.directive("compare",function(){
       })
     }
   }
+});
+app.directive('icheck', function($timeout, $parse) {
+ return {
+  require: 'ngModel',
+  link: function($scope, element, $attrs, ngModel) {
+   return $timeout(function() {
+    var value;
+    value = $attrs['value'];
+    $scope.$watch($attrs['ngModel'], function(newValue){
+     $(element).iCheck('update');
+    })
+    return $(element).iCheck({
+     checkboxClass: 'icheckbox_flat-blue',
+     radioClass: 'iradio_flat-blue',
+     checkedClass:'checked'
+    }).on('ifChanged', function(event) {
+     if ($(element).attr('type') === 'checkbox' && $attrs['ngModel']) {
+      $scope.$apply(function() {
+       return ngModel.$setViewValue(event.target.checked);
+      });
+     }
+     if ($(element).attr('type') === 'radio' && $attrs['ngModel']) {
+      return $scope.$apply(function() {
+       return ngModel.$setViewValue(value);
+      });
+     }
+    });
+   });
+  }
+ };
 });
 </script>
 <script type="text/javascript" src="src/js/route.js"></script>

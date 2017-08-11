@@ -1,60 +1,142 @@
 <style>
     #btnGroup{text-align: center;}
-	#formTable tr td:first-child{width:30%;text-align: right;}
-	.glyphicon-remove,.glyphicon-ok{position:relative;left:-23px;}
-	.glyphicon-ok{color:#54b4eb;}
-	.glyphicon-remove{color:#ce4844;}
+	#formTable tr td:first-child{width:30%;text-align: right;vertical-align: middle;}	
+	.glyphicon-ok{color:#3498db;}
+	.glyphicon-warning-sign{color:#ce4844;}
+	#formTable .formContainer{position: relative;padding-right: 0}
+	.formContainer .glyphicon-warning-sign,.formContainer .glyphicon-ok{position: absolute;right:10px;top:12px;}
+	.noticeMsg{color:#ce4844;position: relative;top:8px;}
+	#formTable input{padding-right: 30px}
+	.point{color:#ce4844;position: relative;top:2px;right:2px;font-weight: bold;}
+
 </style>
 
-<div ng-controller="formCtrl">
+<div ng-controller="formCtrl" id="formbox">
 	<form name="myForm" ng-submit="submitForm()" class="form-horizontal" id="myForm">
 		<table  class="table table-bordered" id="formTable">
 			<tbody>
 				<tr>
 					<td>
-						<label for="username">用户名</label>
+						<label for="username"><span class="point">*</span>姓名</label>
 					</td>
 					<td>
+						<div class="col-lg-5 formContainer">
 						  <input type="text"
+						  		 id="username"
+						  		 class="form-control" 
 						  		 name="username" 
 						  		 required
-						  		 ng-maxlength="32"
+						  		 ng-maxlength="10"
 						  		 ng-minlength="4"  
-						  		 ng-model="userdata.username"/>
+						  		 ng-model="userdata.username"
+						  		 placeholder="请输入4-10位用户名" />
 						  <i class="glyphicon glyphicon-ok" ng-if="myForm.username.$valid && myForm.username.$touched"></i>
-						  <span class="alert alert-danger" ng-if="myForm.username.$error.required">必填</span>
-						  <span class="alert alert-danger" ng-if="myForm.username.$error.maxlength || myForm.username.$error.minlength && myForm.username.$touched">用户名长度需在4到32位</span>
+						  <i class="glyphicon glyphicon-warning-sign" ng-if="!myForm.username.$valid && myForm.username.$touched"></i>
+						</div>
+						<div class="col-lg-7">    
+						  <span class="noticeMsg" ng-if="myForm.username.$error.required && myForm.username.$touched">必填</span>
+						  <span class="noticeMsg" ng-if="myForm.username.$error.maxlength || myForm.username.$error.minlength && myForm.username.$touched">用户名长度需在4到10位</span>
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="password1">输入密码</label>
+						<label for="sex"><span class="point">*</span>性别</label>
 					</td>
 					<td>
-						<input type="password" 
-							   name="password1"
-							   required  
-							   ng-model="userdata.password1"
-							   ng-maxlength="10"
-							   ng-minlength="4"
-							   >
-						<i class="glyphicon glyphicon-ok" ng-if="myForm.password1.$valid && myForm.password1.$touched"></i>
-						<i class="glyphicon glyphicon-remove" ng-if="!myForm.password1.$valid && myForm.password1.$touched"></i>
-						<span class="alert alert-danger" ng-if="myForm.password1.$error.required">必填</span>
-						<span class="alert alert-danger  btn-sm" ng-if="myForm.password1.$error.maxlength || myForm.password1.$error.minlength && myForm.password1.$touched">用户名长度在4到10位</span>
+						<div class="col-lg-3">
+							<select ng-model="userdata.sex"
+									name="sex"
+									class="form-control"
+									required>
+				                <option value="m" ng-selected="sex=='m'">男</option>
+				                <option value="f" ng-selected="sex=='f'">女</option>
+				            </select>				            
+						</div>
+						<div class="col-lg-9">
+							<span class="noticeMsg" ng-if="myForm.sex.$error.required && myForm.sex.$touched">必填</span>					
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="password2">再次输入密码</label>
+						<label for="password1"><span class="point">*</span>输入密码</label>
 					</td>
 					<td>
-						<input type="password" 
-							   name="password2" 
-							   ng-model="userdata.password2"
-							   >
-						<i class="glyphicon glyphicon-ok" ng-if="myForm.password1.$valid && myForm.password1.$touched"></i>
-						<span class="alert alert-danger" ng-if="userdata.password2!=userdata.password1 && myForm.password2.$touched && myForm.password1.$valid">两次密码输入不正确</span>
+						<div class="col-lg-5 formContainer">
+							<input type="password" 
+								   name="password1"
+								   class="form-control" 
+								   required  
+								   ng-model="userdata.password1"
+								   ng-maxlength="10"
+								   ng-minlength="4"
+								   placeholder="请输入密码"
+								   >
+							<i class="glyphicon glyphicon-ok" ng-if="myForm.password1.$valid && myForm.password1.$touched"></i>
+							<i class="glyphicon glyphicon-warning-sign" ng-if="!myForm.password1.$valid && myForm.password1.$touched"></i>
+						</div>
+						<div  class="col-lg-7">
+							<span class="noticeMsg" ng-if="myForm.password1.$error.required && myForm.password1.$touched">必填</span>
+							<span class="noticeMsg" ng-if="myForm.password1.$error.maxlength || myForm.password1.$error.minlength && myForm.password1.$touched">密码长度在4到10位</span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="password2"><span class="point">*</span>再次输入密码</label>
+					</td>
+					<td>
+						<div class="col-lg-5 formContainer">
+							<input type="password" 
+								   name="password2"
+								   class="form-control"
+								   required 
+								   ng-model="userdata.password2"
+								   >
+							<i class="glyphicon glyphicon-ok" ng-if="myForm.password2.$valid && myForm.password2.$touched && userdata.password1==userdata.password2"></i>
+							<i class="glyphicon glyphicon-warning-sign" ng-if="!myForm.password2.$valid && myForm.password2.$touched"></i>
+						</div>
+						<div class="col-lg-7">
+							<span class="noticeMsg" ng-if="userdata.password2!=userdata.password1 && myForm.password2.$touched && myForm.password1.$valid">两次密码输入不正确</span>
+						</div>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<label>前端框架</label>
+					</td>
+					<td>
+						<div class="col-lg-5">
+							<input id="ng1" ng-checked="true" icheck type="radio" ng-model="userdata.frame" name="sex" value="AngularJs1">
+							<label for="ng1">AngularJs1</label>
+							<input id="ng2" icheck type="radio" ng-model="userdata.frame" name="sex" value="AngularJs2">
+							<label for="ng2">AngularJs2</label>							
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>前端技术</label>
+					</td>
+					<td>
+						<div  class="col-lg-12">
+							<input id="jq" icheck type="checkbox" ng-model="userdata.libs[0]" name="jquery">
+							<label for="jq">JQuery</label>&nbsp&nbsp
+							<input id="bootstrap" icheck type="checkbox" ng-model="userdata.libs[1]" name="bootstrap">
+							<label for="bootstrap">Bootstrap</label>&nbsp&nbsp
+							<input id="icheck" icheck type="checkbox" ng-model="userdata.libs[2]" name="icheck">
+							<label for="icheck">icheck</label>&nbsp&nbsp
+							<input id="animateCss" icheck type="checkbox" ng-model="userdata.libs[3]" name="animateCss">
+							<label for="animateCss">animateCss</label>&nbsp&nbsp
+							<input id="vuex" icheck type="checkbox" ng-model="userdata.libs[4]" name="vuex">
+							<label for="vuex">vuex</label>&nbsp&nbsp
+							<input id="nodejs" icheck type="checkbox" ng-model="userdata.libs[5]" name="nodejs">
+							<label for="nodejs">nodejs</label>&nbsp&nbsp
+							<input id="reactjs" icheck type="checkbox" ng-model="userdata.libs[6]" name="react">
+							<label for="reactjs">reactjs</label>
+						</div>
 					</td>
 				</tr>
 				<tr>
@@ -62,21 +144,21 @@
 						<label for="remark">备注</label>
 					</td>
 					<td>
-						<textarea
-							   name="remark"							    
-							   ng-model="userdata.remark"
-							   required
-							   >
-						</textarea>
-						<span class="alert alert-danger" ng-if="myForm.remark.$error.required">必填项</span>
+						<div class="col-lg-7">
+							<textarea class="form-control"
+								   name="remark"							    
+								   ng-model="userdata.remark"
+								   rows="4"
+								   >
+							</textarea>
+						</div>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		<div id="btnGroup">
 			<input class="btn btn-primary" type="submit" ng-disabled="myForm.$invalid"/>
-			<input class="btn btn-default" type="reset"/>
+			<input class="btn btn-default" type="button"  value="重置" ng-click="resetForm()"/>
 		</div>
 	</form>
 </div>
-

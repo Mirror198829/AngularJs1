@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Mirror198829/Mirror198829.github.io#readme",
   "devDependencies": {
     "angular": "1.5.11",
+    "icheck": "^1.0.2",
     "patternfly": "^3.26.1"
   },
   "dependencies": {
