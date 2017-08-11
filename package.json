@@ -21,8 +21,6 @@
     "patternfly": "^3.26.1"
   },
   "dependencies": {
-    "@uirouter/angularjs": "^1.0.5",
-    "angular-patternfly": "^4.3.0",
     "angular-route": "^1.5.11",
     "angular-ui-bootstrap": "^2.5.0",
     "angular-ui-router": "^1.0.3",
