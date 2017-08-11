@@ -1,0 +1,82 @@
+<style>
+    #btnGroup{text-align: center;}
+	#formTable tr td:first-child{width:30%;text-align: right;}
+	.glyphicon-remove,.glyphicon-ok{position:relative;left:-23px;}
+	.glyphicon-ok{color:#54b4eb;}
+	.glyphicon-remove{color:#ce4844;}
+</style>
+
+<div ng-controller="formCtrl">
+	<form name="myForm" ng-submit="submitForm()" class="form-horizontal" id="myForm">
+		<table  class="table table-bordered" id="formTable">
+			<tbody>
+				<tr>
+					<td>
+						<label for="username">用户名</label>
+					</td>
+					<td>
+						  <input type="text"
+						  		 name="username" 
+						  		 required
+						  		 ng-maxlength="32"
+						  		 ng-minlength="4"  
+						  		 ng-model="userdata.username"/>
+						  <i class="glyphicon glyphicon-ok" ng-if="myForm.username.$valid && myForm.username.$touched"></i>
+						  <span class="alert alert-danger" ng-if="myForm.username.$error.required">必填</span>
+						  <span class="alert alert-danger" ng-if="myForm.username.$error.maxlength || myForm.username.$error.minlength && myForm.username.$touched">用户名长度需在4到32位</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="password1">输入密码</label>
+					</td>
+					<td>
+						<input type="password" 
+							   name="password1"
+							   required  
+							   ng-model="userdata.password1"
+							   ng-maxlength="10"
+							   ng-minlength="4"
+							   >
+						<i class="glyphicon glyphicon-ok" ng-if="myForm.password1.$valid && myForm.password1.$touched"></i>
+						<i class="glyphicon glyphicon-remove" ng-if="!myForm.password1.$valid && myForm.password1.$touched"></i>
+						<span class="alert alert-danger" ng-if="myForm.password1.$error.required">必填</span>
+						<span class="alert alert-danger  btn-sm" ng-if="myForm.password1.$error.maxlength || myForm.password1.$error.minlength && myForm.password1.$touched">用户名长度在4到10位</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="password2">再次输入密码</label>
+					</td>
+					<td>
+						<input type="password" 
+							   name="password2" 
+							   ng-model="userdata.password2"
+							   >
+						<i class="glyphicon glyphicon-ok" ng-if="myForm.password1.$valid && myForm.password1.$touched"></i>
+						<span class="alert alert-danger" ng-if="userdata.password2!=userdata.password1 && myForm.password2.$touched && myForm.password1.$valid">两次密码输入不正确</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="remark">备注</label>
+					</td>
+					<td>
+						<textarea
+							   name="remark"							    
+							   ng-model="userdata.remark"
+							   required
+							   >
+						</textarea>
+						<span class="alert alert-danger" ng-if="myForm.remark.$error.required">必填项</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div id="btnGroup">
+			<input class="btn btn-primary" type="submit" ng-disabled="myForm.$invalid"/>
+			<input class="btn btn-default" type="reset"/>
+		</div>
+	</form>
+</div>
+

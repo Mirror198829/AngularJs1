@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AngularJs</title>
+  <link rel="icon" href="src/img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  <!-- <link rel="stylesheet" type="text/css" href="node_modules/angular-patternfly/dist/styles/angular-patternfly.min.css"> -->
+ <!--  <link rel="stylesheet" type="text/css" href="node_modules/patternfly/dist/css/patternfly.css"> -->
+ <!--  <link rel="stylesheet" type="text/css" href="node_modules/patternfly/dist/css/patternfly.min.css"> -->
+ <!-- <link rel="stylesheet" type="text/css" href="node_modules/patternfly/dist/css/patternfly.min.css">
+ <link rel="stylesheet" type="text/css" href="node_modules/patternfly/dist/css/patternfly-additions.css"> -->
+	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="node_modules//bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+  <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <!-- <script type="text/javascript" src="node_modules/patternfly/dist/js/patternfly.min.js"></script> -->
+	<script src="libs/angular-bootstrap/ui-bootstrap.js"></script>
+  <script src="libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+ <!--  <script src="libs/angular-sanitize/angular-sanitize.min.js"></script> -->  
+	<!-- <script type="text/javascript" src="node_modules/angular-patternfly/dist/angular-patternfly.js"></script>
+  <script type="text/javascript" src="node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+  <script type="text/javascript" src="node_modules/patternfly/node_modules/d3/d3.js"></script -->
+	<style type="text/css">
+	 #viewContainer,#navcontainer{width: 80%;margin:0 auto;}
+   body{overflow-y: scroll}
+	</style>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="personCtrl">
+<div>
+  <div id="navcontainer">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">AngularJS Demo</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li  ui-sref-active="active"><a ui-sref="bootstrap">bootstrap</a></li>
+            <li  ui-sref-active="active"><a ui-sref="ngForm">NG-Form</a></li>
+            <li  ui-sref-active="active"><a ui-sref="uiView">路由</a></li>
+            <li class="dropdown" ui-sref-active="active">
+              <a href="#/F8" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">F8 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">镜像</a></li>
+                <li><a href="#">容器</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">kubernetes</a></li>
+              </ul>
+            </li>
+          </ul>
+         
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>Layout</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </div>
+</div> 
+<div ui-view id="viewContainer"></div>
+</div>
+<script>
+var app = angular.module('myApp',['ui.router','ui.bootstrap']);
+app.controller('personCtrl', function($scope,$location,$uibModal) {
+  $scope.alerts = [];
+  $scope.addAlert = function () {
+      $scope.alerts.push({ msg: '这是一条消息!' });
+  };
+ $scope.dat = new Date();
+   $scope.format = "yyyy/MM/dd";
+   $scope.altInputFormats = ['yyyy/M!/d!'];
+   $scope.popup1 = {
+       opened: false
+ };
+   $scope.open1 = function () {
+      $scope.popup1.opened = true;
+  };
+ $scope.modal=null;
+ $scope.maxSize = 5;
+ $scope.totalItems = 175;
+ $scope.currentPage = 1;
+ var confirmTemplate = ["<h3>我是一个dialaog</h3><button  ng-click='closeModal()'>关闭模态框</button>"].join("")
+  $scope.showModal=function(){
+    $scope.modal=$uibModal.
+    open({
+      scope:$scope,
+      template:confirmTemplate
+    })
+  };
+  $scope.closeModal=function(){
+      $scope.modal.close();
+  }
+});
+app.controller("formCtrl",function($scope){
+   $scope.userdata = {};
+   $scope.submitForm = function(){     
+      if($scope.myForm.$invalid){
+        alert("请检查表单提交信息！");
+        return false;
+      }else{
+        console.log($scope.userdata);
+        alert("提交成功！")
+      }
+      
+   }
+});
+app.directive("compare",function(){
+  return{
+    "strict":"AE",
+    "scope":{"orgText":"=compare"},
+    "require":"ngModel",
+    "link":function(sco,ele,att,con){
+      con.$validators.compare=function(v){
+        return v==sco.orgText
+      };
+      sco.$watch("orgText",function(){
+        con.$validate();
+      })
+    }
+  }
+});
+</script>
+<script type="text/javascript" src="src/js/route.js"></script>
+</body>
+</html>

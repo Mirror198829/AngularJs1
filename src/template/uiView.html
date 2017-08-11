@@ -1,0 +1,26 @@
+<div>
+<blockquote>
+<code>
+app.config(function($urlRouterProvider, $stateProvider) {
+  $urlRouterProvider.otherwise("/home");
+  $stateProvider
+    .state("uiView", {
+      url: "/uiView",
+      templateUrl: "13131"})
+    .state("ngForm",{
+      url:'/ngFormDemo',
+      templateUrl:"src"})
+    .state("bootstrap",{
+      url:'/bootstrap',
+      templateUrl:'src/template/bootstrap.html'})
+    .state("home",{
+      url:"/home",
+      template:"我是首页"
+    })
+  })
+</code>
+</blockquote>
+<blockquote>
+ui-sref-active配合使用
+</blockquote>
+</div>

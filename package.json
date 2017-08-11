@@ -1,0 +1,32 @@
+{
+  "name": "angularjs",
+  "version": "1.0.0",
+  "description": "Angularjs Home Page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mirror198829/Mirror198829.github.io.git"
+  },
+  "author": "Caojing",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mirror198829/Mirror198829.github.io/issues"
+  },
+  "homepage": "https://github.com/Mirror198829/Mirror198829.github.io#readme",
+  "devDependencies": {
+    "angular": "1.5.11",
+    "patternfly": "^3.26.1"
+  },
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.5",
+    "angular-patternfly": "^4.3.0",
+    "angular-route": "^1.5.11",
+    "angular-ui-bootstrap": "^2.5.0",
+    "angular-ui-router": "^1.0.3",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1"
+  }
+}
