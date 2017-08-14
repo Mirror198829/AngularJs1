@@ -24,7 +24,12 @@ false:所有指令共享作用域，带来的问题是：一个指令作用域�
 ### 独立作用域 true
 true:指令之间不再共享作用域；指令兄弟间进行独立；
 ### 隔离作用域 {}
-
+隔离作用域有3个绑定策略：@  =  &
+* @ :绑定普通字符串
+* = ：绑定的是外层controller里的数据，变成了变量
+* & :绑定父级函数，（重点：如何传参）
+## controller
+针对自定义指令内部的控制器，自定义指令里面共享的数据可放在controller里面
 ## 事件指令
 * ng-click/dbclick ng-mousedown/up ng-mouseenter/leave ng-mousemove/over/out ng-keydown/up/press ng-focus/blur ng-submit
 * ng-selected
