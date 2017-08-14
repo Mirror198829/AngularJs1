@@ -14,6 +14,9 @@ restrict共有4个选项，为了指明ng在HTML模板中如何触发指令
 * E: 只匹配元素名 `<blg-menu></blg-menu>`
 * C: 只匹配类名 `<div class="blg-menu"></div>`
 * M: 只匹配注释 `<!--directive:blg-menu-->`
+## replace
+* true：替换匹配html（注意：template的结构必须有一对闭合标签包裹）
+* false: 在匹配html之内创建替换template
 通常设置为 restrict:'AE'
 ## 事件指令
 * ng-click/dbclick ng-mousedown/up ng-mouseenter/leave ng-mousemove/over/out ng-keydown/up/press ng-focus/blur ng-submit
