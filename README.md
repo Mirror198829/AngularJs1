@@ -18,6 +18,13 @@ restrict共有4个选项，为了指明ng在HTML模板中如何触发指令
 * true：替换匹配html（注意：template的结构必须有一对闭合标签包裹）
 * false: 在匹配html之内创建替换template
 通常设置为 restrict:'AE'
+## scope
+### 默认值 false
+false:所有指令共享作用域，带来的问题是：一个指令作用域值发生变化，其他会一起发生变化
+### 独立作用域 true
+true:指令之间不再共享作用域；指令兄弟间进行独立；
+### 隔离作用域 {}
+
 ## 事件指令
 * ng-click/dbclick ng-mousedown/up ng-mouseenter/leave ng-mousemove/over/out ng-keydown/up/press ng-focus/blur ng-submit
 * ng-selected
