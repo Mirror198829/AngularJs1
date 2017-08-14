@@ -26,6 +26,7 @@
 	<style type="text/css">
 	 #viewContainer,#navcontainer{width: 80%;margin:0 auto;}
    body{overflow-y: scroll}
+   .innerCtr{background-color: #3598db;padding:20px;box-sizing: border-box;margin:10px 0;color:#333;border-radius: 3px}
 	</style>
 </head>
 <body>
@@ -50,6 +51,7 @@
             <li  ui-sref-active="active"><a ui-sref="bootstrap">bootstrap</a></li>
             <li  ui-sref-active="active"><a ui-sref="ngForm">NG-Form</a></li>
             <li  ui-sref-active="active"><a ui-sref="uiView">路由</a></li>
+            <li  ui-sref-active="active"><a ui-sref="directive">指令</a></li>
             <li class="dropdown" ui-sref-active="active">
               <a href="#/F8" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">F8 <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -78,15 +80,17 @@ app.controller('personCtrl', function($scope,$location,$uibModal) {
   $scope.addAlert = function () {
       $scope.alerts.push({ msg: '这是一条消息!' });
   };
- $scope.dat = new Date();
-   $scope.format = "yyyy/MM/dd";
-   $scope.altInputFormats = ['yyyy/M!/d!'];
-   $scope.popup1 = {
-       opened: false
- };
+  $scope.name="我是最外层的控制器数据";
+   $scope.dat = new Date();
+     $scope.format = "yyyy/MM/dd";
+     $scope.altInputFormats = ['yyyy/M!/d!'];
+     $scope.popup1 = {
+         opened: false
+   };
    $scope.open1 = function () {
       $scope.popup1.opened = true;
   };
+  
  $scope.modal=null;
  $scope.maxSize = 5;
  $scope.totalItems = 175;
@@ -163,7 +167,35 @@ app.directive('icheck', function($timeout, $parse) {
   }
  };
 });
+app.controller('parentCtrl',function($scope){
+  $scope.name="parentCtrl";
+  $scope.showMyFavor=function(fav){
+    alert(fav)
+  };
+})
+app.directive("bigMenu",function(){
+  return{
+    restrict:"AE",
+    template:'<div class="innerCtr"><input ng-model="name"/>我的年龄是{{age}}<button ng-click="showFav({fav:fav})">点击才能看到我的兴趣爱好哟！</button></div>',
+    replace:false,
+    scope:{
+      name:'=aaa',
+      age:"@myAge",
+      showFav:"&myFn",
+      fav:'@'
+    },
+    // controller:['$scope',function($scope){
+    //   $scope.name="我是指令内部控制器数据"
+    // }],
+    link:function(scope,el,attrs){
+      console.log(attrs.class);
+      console.log(el);   
+      
+    }
+  }
+})
 </script>
 <script type="text/javascript" src="src/js/route.js"></script>
+<script type="text/javascript" src="src/directive/nl-tab/nl-tabs.js"></script>
 </body>
 </html>

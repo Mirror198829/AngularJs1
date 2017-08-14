@@ -1,0 +1,17 @@
+<style type="text/css">
+#parentCtrl{width: 100%;padding:0 20px 20px;border-radius: 5px;border:2px solid #ccc;}
+
+</style>
+<div id="parentCtrl" ng-controller="parentCtrl">
+<h2>我是父亲Ctrl</h2>
+<h3>我的设置如下：
+name(初始值为：parentCtrlName):<input type="text" name="name" ng-model="name">
+</h3>
+<big-menu  class="active" data-id="id" aaa="name" my-age=18 my-fn="showMyFavor(fav)" fav="swimming"></big-menu>
+
+<big-menu  class="active" data-id="id"  aaa="name" my-age=20 my-fn="showMyFavor(fav)" fav="sports"></big-menu>
+
+
+<nl-tabs></nl-tabs>
+</div>
+

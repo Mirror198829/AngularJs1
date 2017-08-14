@@ -16,12 +16,11 @@
     "url": "https://github.com/Mirror198829/Mirror198829.github.io/issues"
   },
   "homepage": "https://github.com/Mirror198829/Mirror198829.github.io#readme",
-  "devDependencies": {
-    "angular": "1.5.11",
-    "icheck": "^1.0.2",
-    "patternfly": "^3.26.1"
+  "devDependencies": {    
   },
   "dependencies": {
+    "angular": "1.5.11",
+    "icheck": "^1.0.2",
     "angular-route": "^1.5.11",
     "angular-ui-bootstrap": "^2.5.0",
     "angular-ui-router": "^1.0.3",
