@@ -32,7 +32,13 @@ true:指令之间不再共享作用域；指令兄弟间进行独立；父子之
 作用域优先级:directive中scope的设置 > directive中controller > directive外部controller
 ## controller
 针对自定义指令内部的控制器，自定义指令里面共享的数据可放在controller里面
-## 事件指令
+## link
+放置dom操作的地方
+
+## 内置指令
+### ng-repeat
+* $first :循环第一个
+### 事件指令
 * ng-click/dbclick ng-mousedown/up ng-mouseenter/leave ng-mousemove/over/out ng-keydown/up/press ng-focus/blur ng-submit
 * ng-selected
 * ng-change
