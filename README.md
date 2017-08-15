@@ -18,7 +18,7 @@ restrict共有4个选项，为了指明ng在HTML模板中如何触发指令
 * true：替换匹配html（注意：template的结构必须有一对闭合标签包裹）
 * false: 在匹配html之内创建替换template
 通常设置为 restrict:'AE'
-## scope
+## scope (重点)
 ### 默认值 false
 false:所有指令共享作用域，带来的问题是：一个指令作用域值发生变化，其他会一起发生变化
 ### 独立作用域 true
@@ -32,9 +32,9 @@ true:指令之间不再共享作用域；指令兄弟间进行独立；父子之
 作用域优先级:directive中scope的设置 > directive中controller > directive外部controller
 ## controller
 针对自定义指令内部的控制器，自定义指令里面共享的数据可放在controller里面
-## link
+## link（重点）
 放置dom操作的地方
-
+* $apply(),$apply(function(){}):$apply()方法可以在angular框架之外执行angular JS的表达式，例如：DOM事件、setTimeout、XHR或其他第三方的库
 ## 内置指令
 ### ng-repeat
 * $first :循环第一个
