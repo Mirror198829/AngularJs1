@@ -8,7 +8,8 @@
 * angular-ui：https://github.com/angular-ui 
 * angular-ui API: http://www.cnblogs.com/pilixiami/p/5634405.html
 * 模态框ng-dialog:https://github.com/likeastore/ngDialog
-* 路由 ui-router :https://ui-router.github.io/ng1/tutorial/hellogalaxy (API)  https://github.com/angular-ui/ui-router
+* 路由 ui-router :https://ui-router.github.io/ng1/tutorial/hellogalaxy (API)  https://github.com/angular-ui/ui-router
+* ng-table: http://ng-table.com/#/
 # AngualrJs生态圈
 * Angular中文社区：http://www.angularjs.cn/A0a6
 # AngularJs1.0 知识点
