@@ -1,5 +1,5 @@
 
-# 技术栈：AngualrJs1.5.11 + iCheck +ui-router
+
 # AngualrJs API查询地址
 * 英文文档：https://code.angularjs.org/1.5.11/docs/api  (推荐)
 * 英文文档：http://ng.xiaocaicai.com/api/ng
