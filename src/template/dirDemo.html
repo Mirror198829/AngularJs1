@@ -1,17 +1,31 @@
 <style type="text/css">
 #parentCtrl{width: 100%;padding:0 20px 20px;border-radius: 5px;border:2px solid #ccc;}
-
 </style>
-<div id="parentCtrl" ng-controller="parentCtrl">
+<div id="parentCtrl" ng-controller="directiveCtrl">
 <h2>我是父亲Ctrl</h2>
 <h3>我的设置如下：
 name(初始值为：parentCtrlName):<input type="text" name="name" ng-model="name">
 </h3>
 <big-menu  class="active" data-id="id" aaa="name" my-age=18 my-fn="showMyFavor(fav)" fav="swimming"></big-menu>
-
 <big-menu  class="active" data-id="id"  aaa="name" my-age=20 my-fn="showMyFavor(fav)" fav="sports"></big-menu>
-
-
-<nl-tabs></nl-tabs>
+<hr/>
+<h3>Tab组件</h3>
+<nl-tabs tabs-data="tabsData"></nl-tabs>
+<h3>分页组件</h3>
+ <div ng-controller="PaginationDemoCtrl">  
+    <ul uib-pagination 
+    total-items="bigTotalItems" 
+    ng-model="bigCurrentPage" 
+    max-size="maxSize" 
+    boundary-links="true" 
+    rotate="false" 
+    next-text="下一页" 
+    last-text="最后一页" 
+    previous-text="上一页" 
+    first-text="第一页" 
+    num-pages="numPages"
+    items-per-page="itemsPerPage"></ul>
+    <pre>Page: {{bigCurrentPage}} / {{numPages}}</pre>
+</div>
 </div>
 

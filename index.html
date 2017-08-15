@@ -5,23 +5,14 @@
 	<title>AngularJs</title>
   <link rel="icon" href="src/img/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
  <link rel="stylesheet" href="node_modules/icheck/skins/flat/blue.css" >
-  <!-- <link rel="stylesheet" type="text/css" href="node_modules/angular-patternfly/dist/styles/angular-patternfly.min.css"> -->
- <!--  <link rel="stylesheet" type="text/css" href="node_modules/patternfly/dist/css/patternfly.css"> -->
- <!--  <link rel="stylesheet" type="text/css" href="node_modules/patternfly/dist/css/patternfly.min.css"> -->
- <!-- <link rel="stylesheet" type="text/css" href="node_modules/patternfly/dist/css/patternfly.min.css">
- <link rel="stylesheet" type="text/css" href="node_modules/patternfly/dist/css/patternfly-additions.css"> -->
 	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="node_modules//bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
   <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-  <!-- <script type="text/javascript" src="node_modules/patternfly/dist/js/patternfly.min.js"></script> -->
-	<script src="libs/angular-bootstrap/ui-bootstrap.js"></script>
-  <script src="libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
- <!--  <script src="libs/angular-sanitize/angular-sanitize.min.js"></script> -->  
-	<!-- <script type="text/javascript" src="node_modules/angular-patternfly/dist/angular-patternfly.js"></script>
-  <script type="text/javascript" src="node_modules/patternfly/node_modules/c3/c3.min.js"></script>
-  <script type="text/javascript" src="node_modules/patternfly/node_modules/d3/d3.js"></script -->
+  <script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+  <script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
   <script type="text/javascript" src="node_modules/icheck/icheck.min.js"></script>
 	<style type="text/css">
 	 #viewContainer,#navcontainer{width: 80%;margin:0 auto;}
@@ -35,7 +26,7 @@
   <div id="navcontainer">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
+        <!-- Brand and toggle get grcnpmouped for better mobile display -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
@@ -167,11 +158,17 @@ app.directive('icheck', function($timeout, $parse) {
   }
  };
 });
-app.controller('parentCtrl',function($scope){
+//指令页面的Ctrl
+app.controller('directiveCtrl',function($scope){
   $scope.name="parentCtrl";
   $scope.showMyFavor=function(fav){
     alert(fav)
   };
+  $scope.tabsData=[
+    {"title":"angualr","content":"google"},
+    {"title":"vue","content":"尤雨溪"},
+    {"title":"react","content":"faceBook"}
+  ];
 })
 app.directive("bigMenu",function(){
   return{
@@ -188,12 +185,29 @@ app.directive("bigMenu",function(){
     //   $scope.name="我是指令内部控制器数据"
     // }],
     link:function(scope,el,attrs){
-      console.log(attrs.class);
-      console.log(el);   
+      //console.log(attrs.class);
+      //console.log(el);   
       
     }
   }
-})
+});
+app.controller('PaginationDemoCtrl', function ($scope, $log) {
+      $scope.totalItems = 64;
+    $scope.currentPage = 4;
+
+  $scope.setPage = function (pageNo) {
+    $scope.currentPage = pageNo;
+  };
+
+  $scope.pageChanged = function() {
+    $log.log('Page changed to: ' + $scope.currentPage);
+  };
+
+  $scope.maxSize = 5;
+  $scope.bigTotalItems = 175;
+  $scope.bigCurrentPage = 1;
+  $scope.itemsPerPage=15;
+  });
 </script>
 <script type="text/javascript" src="src/js/route.js"></script>
 <script type="text/javascript" src="src/directive/nl-tab/nl-tabs.js"></script>
