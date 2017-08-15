@@ -1,7 +1,15 @@
 
 # 技术栈：AngualrJs1.5.11 + iCheck +ui-router
+# AngualrJs API查询地址
+* 英文文档：https://code.angularjs.org/1.5.11/docs/api  (推荐)
+* 英文文档：http://ng.xiaocaicai.com/api/ng
+* 中文文档：http://docs.ngnice.com/api
+# AngularJs相关组件
+* angular-ui：https://github.com/angular-ui 
+* angular-ui API: http://www.cnblogs.com/pilixiami/p/5634405.html
+* 模态框ng-dialog:https://github.com/likeastore/ngDialog
+* 路由 ui-router :https://ui-router.github.io/ng1/tutorial/hellogalaxy (API)  https://github.com/angular-ui/ui-router
 # AngularJs1.0 知识点
-
 # 指令
 ## 指令的命名约定
 * js中指令的名称是驼峰式，如：blgMenu
