@@ -77,7 +77,39 @@ true:指令之间不再共享作用域；指令兄弟间进行独立；父子之
 放置dom操作的地方
 * $apply(),$apply(function(){}):$apply()方法可以在angular框架之外执行angular JS的表达式，例如：DOM事件、setTimeout、XHR或其他第三方的库
 ## 指令执行过程
+``` html
+<div ng-controller="testCtrl">
+   <h1>用于测试执行顺序</h1>
+   <nl-test></nl-test>
+</div>
+```
+``` javascript
+function logTest(text){
+  console.log(text);
+  debugger;
+}
+app.controller('testCtrl',function($scope){
+   logTest('外部testCtrl');
+});
 
+app.directive('nlTest',function(){
+  logTest('指令初始化');
+  return{
+    restrict:"AE",
+    template:'<div>{{name}}</div>',
+    controller:['$scope',function($scope){
+      $scope.name="指令模板";
+      logTest("指令内controller")
+    }],
+    link:function(scope,ele,attrs){
+       logTest("指令内link")
+    }  
+  }
+})
+```
+执行结果顺序为： 
+* template内含ng指令：指令初始化 => template dom展示 => 外部testCtrl => 指令内controller => 指令内link => template ng指令调用
+* template不含ng指令：指令初始化 => template dom展示 => 外部testCtrl => 指令内controller => 指令内link 
 ## 内置指令
 ### ng-repeat
 * $first :循环第一个
