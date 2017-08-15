@@ -64,13 +64,13 @@ true:指令之间不再共享作用域；指令兄弟间进行独立；父子之
 * .ng-dirty{}
 # 脏检查工作过程
 参考文档： http://www.angularjs.cn/A0a6
-## angular context
-## $watch
+### angular context
+### $watch
 * 每1个绑定到了dom上的数据都会向`$watch 队列`插入1个`$watch`
 * 监听变化
 * `$watch(watchExpression, listener, objectEquality)` 第3个参数：true，深度监听，监听对象（数组，对象）中每1个属性
-## $apply
+### $apply
 将调用事件放入`angular context执行环境`，从而触发$digest,这也是为什么对第三方库需要手动 $apply，ng内置事件指令已经将$apply封装其中
-## $digest
+### $digest
 作用：遍历 `$watch 队列`，进行`dirty-checking`,如有变化，DOM发生变化
 
