@@ -35,10 +35,9 @@ app.directive("nlTabs",function(){
     link:function(scope,ele,attrs){
     	ele.delegate(".nl-tabs_item","click",function(){
     		var num=0;
-    		$(".nl-tabs_item").removeClass('active');
-    		$(this).addClass("active");
-    		num=$(".nl-tabs_item").index($(this));
-    		$(".nl-tabs_content").removeClass("active").eq(num).addClass("active");
+    		$(this).addClass("active").siblings('.nl-tabs_item').removeClass("active");
+    		num=ele.find('.nl-tabs_item').index($(this));
+    		ele.find(".nl-tabs_content").removeClass("active").eq(num).addClass("active");
     	})   	
     }
   }
