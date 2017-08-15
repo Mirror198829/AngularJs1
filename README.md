@@ -6,7 +6,7 @@
 * 中文文档：http://docs.ngnice.com/api
 # AngularJs相关组件
 * angular-ui：https://github.com/angular-ui 
-* angular-ui API: http://www.cnblogs.com/pilixiami/p/5634405.html
+* angular-ui API: https://angular-ui.github.io/bootstrap/#!#pagination (官方) http://www.cnblogs.com/pilixiami/p/5634405.html (参考文档)
 * 模态框ng-dialog:https://github.com/likeastore/ngDialog
 * 路由 ui-router :https://ui-router.github.io/ng1/tutorial/hellogalaxy (API)  https://github.com/angular-ui/ui-router
 * ng-table: http://ng-table.com/#/
