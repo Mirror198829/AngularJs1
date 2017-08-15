@@ -12,7 +12,7 @@
 * ng-table: http://ng-table.com/#/
 # AngualrJs生态圈
 * Angular中文社区：http://www.angularjs.cn/A0a6
-# AngularJs1.0 知识点
+# AngularJs1 知识点
 # 指令
 ## 指令示例
 ``` html
