@@ -76,6 +76,7 @@ true:指令之间不再共享作用域；指令兄弟间进行独立；父子之
 ## link（重点）
 放置dom操作的地方
 * $apply(),$apply(function(){}):$apply()方法可以在angular框架之外执行angular JS的表达式，例如：DOM事件、setTimeout、XHR或其他第三方的库
+* link中使用jquery写dom操作时不要写成`$(".nl-tabs_item").removeClass('active')` （忌），非常容易造成一个页面多个相同指令引入后，获取dom数不符合预期
 ## 指令执行过程
 ``` html
 <div ng-controller="testCtrl">
