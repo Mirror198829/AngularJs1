@@ -1,4 +1,8 @@
-
+# Usage
+* 下载工程依赖
+`cnpm install`
+* 在工程根目录启动mock数据
+`node mock.js`
 
 # AngualrJs API查询地址
 * 英文文档：https://code.angularjs.org/1.5.11/docs/api  (推荐)
