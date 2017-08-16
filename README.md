@@ -54,10 +54,13 @@ restrict共有4个选项，为了指明ng在HTML模板中如何触发指令
 * E: 只匹配元素名 `<blg-menu></blg-menu>`
 * C: 只匹配类名 `<div class="blg-menu"></div>`
 * M: 只匹配注释 `<!--directive:blg-menu-->`
-## replace
-* true：替换匹配html（注意：template的结构必须有一对闭合标签包裹）
-* false: 在匹配html之内创建替换template
 通常设置为 restrict:'AE'
+## replace
+* true：替换匹配html
+* false: 在匹配html之内创建替换template
+## template | templateUrl
+* 若模板中包含多个dom元素，必须放在一个根dom元素上
+* templateUrl通过ajax请求html模板，因此本地开发需启动服务，否则造成CORS错误
 ## scope (重点)
 ### 默认值 false
 false:所有指令共享作用域，带来的问题是：一个指令作用域值发生变化，其他会一起发生变化
