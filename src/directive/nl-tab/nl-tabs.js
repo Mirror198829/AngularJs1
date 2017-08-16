@@ -1,7 +1,12 @@
 app.directive("nlTabs",function(){
   return{
     restrict:"AE",
-    templateUrl:'src/directive/nl-tab/nl-tabs.html',
+    template:'<div class="nl-tabs">\
+				<ul class="nl-tabs_nav clearfix">\
+					<li class="nl-tabs_item" ng-repeat="(key,val) in tabsData" ng-class="{\'active\':$first}">{{val.title}}</li>\
+				</ul>\
+				<div class="nl-tabs_content" ng-repeat="(key,val) in tabsData" ng-class="{\'active\':$first}">{{val.content}}</div>\
+  			  </div>',
     replace:true,
     scope:{
     	tabsData:"="

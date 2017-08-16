@@ -1,0 +1,8 @@
+.nl-tabs{border:1px solid #d1dbe5;margin:10px 0;}
+.nl-tabs_nav{background-color: #eef1f6;}
+.nl-tabs_item{float: left;height: 50px;line-height: 50px;padding:0 20px;cursor: pointer;box-sizing: border-box;}
+.nl-tabs_item:hover{color:#20a0ff;}
+.nl-tabs_item.active{border: solid #d1dbe5;border-width:0px 1px;font-weight: bold;color:#20a0ff;background-color: #fff;}
+.nl-tabs_item:first-child{border-left:0}
+.nl-tabs_content{padding:20px;display: none;}
+.nl-tabs_content.active{display: block}
