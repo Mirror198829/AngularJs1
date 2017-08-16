@@ -1,60 +1,51 @@
-<style type="text/css">
-#parentCtrl{width: 100%;padding:0 20px 20px;border-radius: 5px;border:2px solid #ccc;}
-</style>
-<div id="parentCtrl" ng-controller="directiveCtrl">
-<h2>我是父亲Ctrl</h2>
-<h3>我的设置如下：
-name(初始值为：parentCtrlName):<input type="text" name="name" ng-model="name">
-</h3>
-<big-menu  class="active" data-id="id" aaa="name" my-age=18 my-fn="showMyFavor(fav)" fav="swimming"></big-menu>
-<big-menu  class="active" data-id="id"  aaa="name" my-age=20 my-fn="showMyFavor(fav)" fav="sports"></big-menu>
-<hr/>
-<h3>Tab组件</h3>
-<nl-tabs tabs-data="tabsData"></nl-tabs>
-<h3>分页组件</h3>
-<div>
-<table class="table table-condensed">
-	<thead>
-		<tr>
-			<th>姓名</th>
-			<th>身份证号</th>
-			<th>年龄</th>
-			<th>学历</th>
-			<th>不可描述</th>
-		</tr>
-	</thead>
-	<tbody>
-	    <tr ng-repeat="(key,value) in tableDatas">
-	      <td class="active">{{value.name}}</td>
-	      <td class="success">{{value.id}}</td>
-	      <td class="warning">{{value.age}}</td>     
-	      <td class="info">{{value.education}}</td>
-	      <td class="danger">{{value.desciption}}</td>
-	    </tr>
-    </tbody>
-</table>
-</div>
- <div class="clearfix" ng-controller="PaginationDemoCtrl"> 
-	<div style="float:left;position: relative;top:7px;color:#337ab7">总条数:{{totalItems}}</div>
-	
-    <div style="float:right;position: relative;top:7px;margin-left:10px;color:#337ab7">
-    	Page: {{currentPage}} / {{numPages}}
-    </div>
-    <div style="float:right">
-	    <ul uib-pagination 
-	    total-items="totalItems" 
-	    ng-model="currentPage" 
-	    max-size="maxSize" 
-	    boundary-links="true" 
-	    rotate="false" 
-	    next-text="下一页" 
-	    last-text="最后一页" 
-	    previous-text="上一页" 
-	    first-text="第一页" 
-	    num-pages="numPages"
-	    items-per-page="itemsPerPage"
-	    ng-change="changePage()"></ul>
-    </div>
-</div>
+<div id="directiveWrap" ng-controller="directiveCtrl">
+	<h3>Tab组件</h3>
+	<nl-tabs tabs-data="tabsData"></nl-tabs>
+	<hr/>
+	<h3>分页组件</h3>
+	<div>
+	<table class="table table-condensed">
+		<thead>
+			<tr>
+				<th>姓名</th>
+				<th>身份证号</th>
+				<th>年龄</th>
+				<th>学历</th>
+				<th>不可描述</th>
+			</tr>
+		</thead>
+		<tbody>
+		    <tr ng-repeat="(key,value) in tableDatas">
+		      <td class="active">{{value.name}}</td>
+		      <td class="success">{{value.id}}</td>
+		      <td class="warning">{{value.age}}</td>     
+		      <td class="info">{{value.education}}</td>
+		      <td class="danger">{{value.desciption}}</td>
+		    </tr>
+	    </tbody>
+	</table>
+	</div>
+	 <div class="clearfix" ng-controller="PaginationDemoCtrl"> 
+		<div style="float:left;position: relative;top:7px;color:#337ab7">总条数:{{totalItems}}</div>
+		
+	    <div style="float:right;position: relative;top:7px;margin-left:10px;color:#337ab7">
+	    	Page: {{currentPage}} / {{numPages}}
+	    </div>
+	    <div style="float:right">
+		    <ul uib-pagination 
+		    total-items="totalItems" 
+		    ng-model="currentPage" 
+		    max-size="maxSize" 
+		    boundary-links="true" 
+		    rotate="false" 
+		    next-text="下一页" 
+		    last-text="最后一页" 
+		    previous-text="上一页" 
+		    first-text="第一页" 
+		    num-pages="numPages"
+		    items-per-page="itemsPerPage"
+		    ng-change="changePage()"></ul>
+	    </div>
+	</div>
 </div>
 

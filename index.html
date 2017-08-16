@@ -47,7 +47,8 @@
             <li  ui-sref-active="active"><a ui-sref="ngForm">NG-Form</a></li>
             <li  ui-sref-active="active"><a ui-sref="uiView">路由</a></li>
             <li  ui-sref-active="active"><a ui-sref="directive">指令</a></li>
-            <li class="dropdown" ui-sref-active="active">
+            <li  ui-sref-active="active"><a ui-sref="relation">控制器&指令scope关系</a></li>
+           <!--  <li class="dropdown" ui-sref-active="active">
               <a href="#/F8" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">F8 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#">镜像</a></li>
@@ -55,7 +56,7 @@
                 <li role="separator" class="divider"></li>
                 <li><a href="#">kubernetes</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
          
           <ul class="nav navbar-nav navbar-right">
@@ -71,7 +72,7 @@
 <script>
 var BASEURL="http://localhost:3000/";
 var app = angular.module('myApp',['ui.router','ui.bootstrap']);
-app.controller('personCtrl', function($scope,$location,$uibModal,$http) {
+app.controller('personCtrl',['$scope','$location','$uibModal','$http', function($scope,$location,$uibModal,$http) {
   $scope.alerts = [];
   $scope.addAlert = function () {
       $scope.alerts.push({ msg: '这是一条消息!' });
@@ -102,8 +103,8 @@ app.controller('personCtrl', function($scope,$location,$uibModal,$http) {
   $scope.closeModal=function(){
       $scope.modal.close();
   }
-});
-app.controller("formCtrl",function($scope){
+}]);
+app.controller("formCtrl",['$scope',function($scope){
    $scope.userdata = {};
    $scope.submitForm = function(){     
       if($scope.myForm.$invalid){
@@ -117,7 +118,7 @@ app.controller("formCtrl",function($scope){
    $scope.resetForm=function(){
      location.reload(); 
    }
-});
+}]);
 app.directive("compare",function(){
   return{
     "strict":"AE",
@@ -165,8 +166,9 @@ app.directive('icheck', function($timeout, $parse) {
  };
 });
 //指令页面的Ctrl
-app.controller('directiveCtrl',function($scope,$http){
+app.controller('directiveCtrl',['$scope','$http',function($scope,$http){
   $scope.name="parentCtrl";
+  $scope.dream="父亲的梦想考取清华北大";
   $scope.showMyFavor=function(fav){
     alert(fav)
   };
@@ -186,21 +188,31 @@ app.controller('directiveCtrl',function($scope,$http){
       })
   };
   $scope.getTableData();
-})
+}])
+app.controller('childrenController',['$scope',function($scope){
+  $scope.showChildDream=function(){
+    $scope.dream="这才是我的梦想"
+  }
+}])
+//bigMenu指令
 app.directive("bigMenu",function(){
   return{
     restrict:"AE",
-    template:'<div class="innerCtr"><input ng-model="name"/>我的年龄是{{age}}<button ng-click="showFav({fav:fav})">点击才能看到我的兴趣爱好哟！</button></div>',
+    template:'<div class="innerCtr"><input ng-model="name"/>我的年龄是{{age}}<button ng-click="showFav({fav:fav})">点击才能看到我的兴趣爱好哟！</button>我的梦想是:{{dream}}<button ng-click="showMyDream()">这才是我真实的梦想</button></div>',
     replace:false,
     scope:{
-      name:'=aaa',
+      //name:'=aaa',
+      dream:"=",
       age:"@myAge",
       showFav:"&myFn",
       fav:'@'
     },
-    // controller:['$scope',function($scope){
-    //   $scope.name="我是指令内部控制器数据"
-    // }],
+    controller:['$scope',function($scope){
+      $scope.name="我是指令内部控制器数据";
+      $scope.showMyDream=function(){
+        $scope.dream="我的梦想是成为一名it工程师"
+      }
+    }],
     link:function(scope,el,attrs){
       //console.log(attrs.class);
       //console.log(el);   
@@ -208,7 +220,7 @@ app.directive("bigMenu",function(){
     }
   }
 });
-app.controller('PaginationDemoCtrl', function ($scope) {
+app.controller('PaginationDemoCtrl', ['$scope',function ($scope) {
     $scope.setPage = function (pageNo) {
       $scope.currentPage = pageNo;
     };
@@ -221,7 +233,64 @@ app.controller('PaginationDemoCtrl', function ($scope) {
     $scope.totalItems = 175;
     $scope.currentPage = 1;
     $scope.itemsPerPage=15;
-  });
+  }]);
+
+app.controller('parentCtrl1',['$scope',function($scope){
+  $scope.dream1="父亲选的梦想是医生";
+  $scope.dream2={"dream":"父亲选的梦想是医生"};
+}]);
+app.controller("childCtrl1",["$scope",function($scope){
+}]);
+app.controller("parentCtrl2",["$scope",function($scope){
+  $scope.dream1="父亲选的梦想是dream1";
+  $scope.dream2={"dream":"父亲选的梦想是dream2"};
+  $scope.dream3="父亲选的梦想是dream3";
+  $scope.dream4={"dream":"父亲选的梦想是dream4"}
+}]);
+app.directive('myDirective',function(){
+  return{
+    restrict:"AE",
+    template:'<ul>\
+          <li class="childItem">\
+            1.儿子的梦想是(基本类型) :<input type="text" ng-model="dream1"> scope:false / true</br/>\
+          </li>\
+          <li  class="childItem">\
+            2.儿子的梦想是(引用类型) :<input type="text" ng-model="dream2.dream"> scope:false / true</br/>\
+          </li>\
+        </ul>'
+  }
+});
+app.directive('myDirective1',function(){
+  return{
+    restrict:"AE",
+    scope:{},
+    template:'<ul>\
+          <li class="childItem">\
+            3.儿子的梦想是(基本类型) :<input type="text" ng-model="dream1"> scope:{}</br/>\
+          </li>\
+          <li  class="childItem">\
+            4.儿子的梦想是(引用类型) :<input type="text" ng-model="dream2.dream"> scope:{}</br/>\
+          </li>\
+        </ul>'
+  }
+});
+app.directive('myDirective2',function(){
+  return{
+    restrict:"AE",
+    scope:{
+      dream3:"=",
+      dream4:"="
+    },
+    template:'<ul>\
+          <li class="childItem">\
+            5.儿子的梦想是(基本类型) :<input type="text" ng-model="dream3"> scope:{dream3:"="}</br/>\
+          </li>\
+          <li  class="childItem">\
+            6.儿子的梦想是(引用类型) :<input type="text" ng-model="dream4.dream"> scope:{dream4:"="}</br/>\
+          </li>\
+        </ul>'
+  }
+})
 </script>
 <script type="text/javascript" src="src/js/route.js"></script>
 <script type="text/javascript" src="src/directive/nl-tab/nl-tabs.js"></script>

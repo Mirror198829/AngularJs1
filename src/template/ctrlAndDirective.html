@@ -1,0 +1,61 @@
+<div>
+	<style type="text/css">
+	.parentCtrl{box-sizing: border-box;padding:10px 20px 20px;background-color: #7ec2f3;}
+	.childCtrl{box-sizing: border-box;padding:10px 20px 20px;border:3px dashed #ddd;background-color: #fff}
+	.parentCtrlTitle,.childCtrlTitle{font-weight: bold;font-size: 18px;color:#000;}
+	.parentCtrlTitle{color: #fff}
+	.ctrlCard{margin-bottom:20px;}
+	.childItem{margin:10px 0;}
+	input{padding:0 10px;font-weight: 700}
+	.childCtrl{margin-top: 10px}
+	.childCtrl ul{margin-bottom: 10px}
+	.parentItem{margin-top:10px;}
+	</style>
+	<div class="ctrlCard" ng-controller="parentCtrl1">
+		<h3>父控制器-子控制器</h3>
+		<div class="parentCtrl">
+			<h5 class="parentCtrlTitle">父控制器</h5>
+			<div>
+			    父亲的梦想(基本类型):<input type="text" ng-model="dream1"/>
+			</div>
+			<div style="margin-top:10px">
+				父亲的梦想(引用类型):<input type="text" ng-model="dream2.dream"/>
+			</div>
+			<div class="childCtrl" ng-controller="childCtrl1">
+				<h6 class="childCtrlTitle">子控制器(未初始化dream)</h6>
+				<ul>
+					<li  class="childItem">
+						儿子的梦想是(继承父亲,基本类型) :<input type="text" ng-model="dream1"></br/>
+					</li>
+					<li  class="childItem">
+						儿子的梦想是(继承父亲,引用类型) :<input type="text" ng-model="dream2.dream"></br/>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="ctrlCard" ng-controller="parentCtrl2">
+		<h3>父控制器-子指令</h3>
+		<div class="parentCtrl">
+			<h5 class="parentCtrlTitle">父控制器</h5>
+			<div class="parentItem">
+			    父亲的梦想(基本类型)-测试(1,3):<input type="text" ng-model="dream1"/>
+			</div>
+			<div class="parentItem">
+				父亲的梦想(引用类型)-测试(2,4):<input type="text" ng-model="dream2.dream" />
+			</div>
+			<div class="parentItem">
+				父亲的梦想(引用类型)-测试5:<input type="text" ng-model="dream3"/>
+			</div>
+			<div class="parentItem">
+				父亲的梦想(引用类型)-测试6:<input type="text" ng-model="dream4.dream"/>
+			</div>
+			<div class="childCtrl">
+				<h6 class="childCtrlTitle">子指令</h6>
+				<my-directive></my-directive>
+				<my-directive1></my-directive1>
+				<my-directive2 dream3="dream3" dream4="dream4"></my-directive2>
+			</div>
+		</div>
+	</div>
+</div>

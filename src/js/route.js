@@ -13,6 +13,9 @@ app.config(function($urlRouterProvider, $stateProvider) {
     .state("directive",{
       url:"/directive",
       templateUrl:"src/template/dirDemo.html"})
+    .state("relation",{
+      url:"/relation",
+      templateUrl:"src/template/ctrlAndDirective.html"})
     .state("404",{
       url:"/404",
       template:"<h1 style='text-align:center;margin-top:100px'>I am sorry,找不到页面,404了哟</h1>"
