@@ -16,7 +16,10 @@
     "url": "https://github.com/Mirror198829/Mirror198829.github.io/issues"
   },
   "homepage": "https://github.com/Mirror198829/Mirror198829.github.io#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "express": "^4.15.4",
+    "mockjs": "^1.0.1-beta3"
+  },
   "dependencies": {
     "angular": "1.5.11",
     "angular-ui-bootstrap": "^2.5.0",

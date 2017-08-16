@@ -69,8 +69,9 @@
 <div ui-view id="viewContainer"></div>
 </div>
 <script>
+var BASEURL="http://localhost:3000/";
 var app = angular.module('myApp',['ui.router','ui.bootstrap']);
-app.controller('personCtrl', function($scope,$location,$uibModal) {
+app.controller('personCtrl', function($scope,$location,$uibModal,$http) {
   $scope.alerts = [];
   $scope.addAlert = function () {
       $scope.alerts.push({ msg: '这是一条消息!' });
@@ -132,6 +133,7 @@ app.directive("compare",function(){
     }
   }
 });
+//icheck指令
 app.directive('icheck', function($timeout, $parse) {
  return {
   require: 'ngModel',
@@ -163,7 +165,7 @@ app.directive('icheck', function($timeout, $parse) {
  };
 });
 //指令页面的Ctrl
-app.controller('directiveCtrl',function($scope){
+app.controller('directiveCtrl',function($scope,$http){
   $scope.name="parentCtrl";
   $scope.showMyFavor=function(fav){
     alert(fav)
@@ -173,6 +175,17 @@ app.controller('directiveCtrl',function($scope){
     {"title":"vue","content":"尤雨溪"},
     {"title":"react","content":"faceBook"}
   ];
+  $scope.getTableData=function(){
+      $http({
+        method:"GET",
+        url:BASEURL+"getData"
+      }).success(function(data,status,headers,config){
+        $scope.tableDatas=data.message;
+      }).error(function(data,status,headers,config){
+        console.log(data)
+      })
+  };
+  $scope.getTableData();
 })
 app.directive("bigMenu",function(){
   return{
@@ -195,22 +208,19 @@ app.directive("bigMenu",function(){
     }
   }
 });
-app.controller('PaginationDemoCtrl', function ($scope, $log) {
-      $scope.totalItems = 64;
-    $scope.currentPage = 4;
+app.controller('PaginationDemoCtrl', function ($scope) {
+    $scope.setPage = function (pageNo) {
+      $scope.currentPage = pageNo;
+    };
 
-  $scope.setPage = function (pageNo) {
-    $scope.currentPage = pageNo;
-  };
+    $scope.changePage = function() {
+      $scope.getTableData();
+    };
 
-  $scope.pageChanged = function() {
-    $log.log('Page changed to: ' + $scope.currentPage);
-  };
-
-  $scope.maxSize = 5;
-  $scope.bigTotalItems = 175;
-  $scope.bigCurrentPage = 1;
-  $scope.itemsPerPage=15;
+    $scope.maxSize = 5;
+    $scope.totalItems = 175;
+    $scope.currentPage = 1;
+    $scope.itemsPerPage=15;
   });
 </script>
 <script type="text/javascript" src="src/js/route.js"></script>

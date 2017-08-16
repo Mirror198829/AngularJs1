@@ -1,3 +1,4 @@
+/* nl-tabs样式 */
 .nl-tabs{border:1px solid #d1dbe5;margin:10px 0;}
 .nl-tabs_nav{background-color: #eef1f6;}
 .nl-tabs_item{float: left;height: 50px;line-height: 50px;padding:0 20px;cursor: pointer;box-sizing: border-box;}
@@ -6,3 +7,6 @@
 .nl-tabs_item:first-child{border-left:0}
 .nl-tabs_content{padding:20px;display: none;}
 .nl-tabs_content.active{display: block}
+/* 重置分页样式 */
+.pagination{margin:0}
+.pagination>.active>a,.pagination>.active>a:hover{color:#fff;background-color:#337ab7;border-color: #337ab7}
