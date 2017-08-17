@@ -1,4 +1,8 @@
-app.directive("nlTabs",function(){
+/**
+** Created by caojing on 2017/8/1
+**/
+angular.module('nlTabs',[])
+.directive("nlTabs",function(){
   return{
     restrict:"AE",
     template:'<div class="nl-tabs">\

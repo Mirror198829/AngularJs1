@@ -1,5 +1,5 @@
 app.config(function($urlRouterProvider, $stateProvider) {
-  $urlRouterProvider.otherwise("/404");
+  $urlRouterProvider.otherwise("/relation");
   $stateProvider
     .state("uiView", {
       url: "/uiView",

@@ -15,6 +15,13 @@ app.get('/getData', function (req, res) {
 		}] 
 	})); 
 });
+app.get('/echartsData', function (req, res) { 
+	res.header("Access-Control-Allow-Origin", "*"); //设置跨域访问 
+	res.json(Mock.mock({ 
+	    "stats":"success", 
+		"message": [Math.floor(Math.random()*80)+20,Math.floor(Math.random()*80)+20,Math.floor(Math.random()*80)+20,Math.floor(Math.random()*80)+20,Math.floor(Math.random()*80)+20,Math.floor(Math.random()*80)+20]
+	})); 
+});
 let server=app.listen('3000',function(){
 	let host=server.address().address;
 	let port=server.address().port;

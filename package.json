@@ -17,15 +17,16 @@
   },
   "homepage": "https://github.com/Mirror198829/Mirror198829.github.io#readme",
   "devDependencies": {
-    "express": "^4.15.4",
-    "mockjs": "^1.0.1-beta3",
     "angular": "1.5.11",
     "angular-ui-bootstrap": "^2.5.0",
     "angular-ui-router": "^1.0.3",
     "bootstrap": "^3.3.7",
+    "echarts": "^3.6.2",
+    "express": "4.15.3",
     "icheck": "^1.0.2",
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "mockjs": "^1.0.1-beta3",
+    "ng-echarts": "^3.0.1"
   },
-  "dependencies": {   
-  }
+  "dependencies": {}
 }

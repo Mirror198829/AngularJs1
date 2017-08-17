@@ -15,6 +15,8 @@
   <script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
   <script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
   <script type="text/javascript" src="node_modules/icheck/icheck.min.js"></script>
+  <script type="text/javascript" src="node_modules/echarts/dist/echarts.min.js"></script>
+  <script type="text/javascript" src="node_modules/ng-echarts/dist/ng-echarts.js"></script>
 	<style type="text/css">	 
    body{overflow-y: scroll} 
    .clearfix{ zoom:1;} 
@@ -47,7 +49,7 @@
             <li  ui-sref-active="active"><a ui-sref="ngForm">NG-Form</a></li>
             <li  ui-sref-active="active"><a ui-sref="uiView">路由</a></li>
             <li  ui-sref-active="active"><a ui-sref="directive">指令</a></li>
-            <li  ui-sref-active="active"><a ui-sref="relation">控制器&指令scope关系</a></li>
+            <li  ui-sref-active="active"><a ui-sref="relation">控制器指令通信</a></li>
            <!--  <li class="dropdown" ui-sref-active="active">
               <a href="#/F8" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">F8 <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -71,7 +73,7 @@
 </div>
 <script>
 var BASEURL="http://localhost:3000/";
-var app = angular.module('myApp',['ui.router','ui.bootstrap']);
+var app = angular.module('myApp',['ui.router','ui.bootstrap','ng-echarts','nlTabs']);
 app.controller('personCtrl',['$scope','$location','$uibModal','$http', function($scope,$location,$uibModal,$http) {
   $scope.alerts = [];
   $scope.addAlert = function () {
@@ -86,8 +88,7 @@ app.controller('personCtrl',['$scope','$location','$uibModal','$http', function(
    };
    $scope.open1 = function () {
       $scope.popup1.opened = true;
-  };
-  
+  };  
  $scope.modal=null;
  $scope.maxSize = 5;
  $scope.totalItems = 175;
@@ -104,6 +105,7 @@ app.controller('personCtrl',['$scope','$location','$uibModal','$http', function(
       $scope.modal.close();
   }
 }]);
+//表单控制器
 app.controller("formCtrl",['$scope',function($scope){
    $scope.userdata = {};
    $scope.submitForm = function(){     
@@ -119,21 +121,6 @@ app.controller("formCtrl",['$scope',function($scope){
      location.reload(); 
    }
 }]);
-app.directive("compare",function(){
-  return{
-    "strict":"AE",
-    "scope":{"orgText":"=compare"},
-    "require":"ngModel",
-    "link":function(sco,ele,att,con){
-      con.$validators.compare=function(v){
-        return v==sco.orgText
-      };
-      sco.$watch("orgText",function(){
-        con.$validate();
-      })
-    }
-  }
-});
 //icheck指令
 app.directive('icheck', function($timeout, $parse) {
  return {
@@ -184,57 +171,24 @@ app.controller('directiveCtrl',['$scope','$http',function($scope,$http){
       }).success(function(data,status,headers,config){
         $scope.tableDatas=data.message;
       }).error(function(data,status,headers,config){
-        console.log(data)
+        alert(data);
       })
   };
   $scope.getTableData();
 }])
-app.controller('childrenController',['$scope',function($scope){
-  $scope.showChildDream=function(){
-    $scope.dream="这才是我的梦想"
-  }
-}])
-//bigMenu指令
-app.directive("bigMenu",function(){
-  return{
-    restrict:"AE",
-    template:'<div class="innerCtr"><input ng-model="name"/>我的年龄是{{age}}<button ng-click="showFav({fav:fav})">点击才能看到我的兴趣爱好哟！</button>我的梦想是:{{dream}}<button ng-click="showMyDream()">这才是我真实的梦想</button></div>',
-    replace:false,
-    scope:{
-      //name:'=aaa',
-      dream:"=",
-      age:"@myAge",
-      showFav:"&myFn",
-      fav:'@'
-    },
-    controller:['$scope',function($scope){
-      $scope.name="我是指令内部控制器数据";
-      $scope.showMyDream=function(){
-        $scope.dream="我的梦想是成为一名it工程师"
-      }
-    }],
-    link:function(scope,el,attrs){
-      //console.log(attrs.class);
-      //console.log(el);   
-      
-    }
-  }
-});
 app.controller('PaginationDemoCtrl', ['$scope',function ($scope) {
     $scope.setPage = function (pageNo) {
       $scope.currentPage = pageNo;
     };
-
     $scope.changePage = function() {
       $scope.getTableData();
     };
-
     $scope.maxSize = 5;
     $scope.totalItems = 175;
     $scope.currentPage = 1;
     $scope.itemsPerPage=15;
-  }]);
-
+}]);
+//控制器与指令通信关系
 app.controller('parentCtrl1',['$scope',function($scope){
   $scope.dream1="父亲选的梦想是医生";
   $scope.dream2={"dream":"父亲选的梦想是医生"};
@@ -290,9 +244,145 @@ app.directive('myDirective2',function(){
           </li>\
         </ul>'
   }
-})
+});
+app.controller('parentCtrl3',['$scope',function($scope){
+    $scope.$on('emitParentCtrl1', function(e, hobby) {
+        $scope.hobby1 = hobby;
+    });
+   // $scope.hobby2={"hobby":""};
+    $scope.$on('emitParentCtrl2', function(e, hobby) {
+        $scope.hobby2=hobby;
+    });
+}]);
+app.controller('childCtrl3',['$scope',function($scope){
+  $scope.hobby1="码代码";
+  $scope.hobby2={"hobby":"写前端"};
+  $scope.emitParentCtrl1=function(){
+    $scope.$emit('emitParentCtrl1', $scope.hobby1);
+  };
+  $scope.emitParentCtrl2=function(){
+    $scope.$emit('emitParentCtrl2', $scope.hobby2);
+  };
+}]);
+app.controller("parentCtrl4",['$scope',function($scope){
+  $scope.hobby1="钓鱼哎";
+  $scope.hobby2={'hobby':"旅游了哎"};
+  $scope.broadcastChild1=function(){
+    $scope.$broadcast('broadcastChild1',$scope.hobby1);
+  };
+  $scope.broadcastChild2=function(){
+    $scope.$broadcast('broadcastChild2',$scope.hobby2);
+  }
+}]);
+app.controller("childCtrl4",['$scope',function($scope){
+  $scope.hobby1="";
+  $scope.hobby2=null;
+  $scope.$on('broadcastChild1',function(e,hobby){
+    $scope.hobby1=hobby;
+  });
+  $scope.$on('broadcastChild2',function(e,hobby){
+    $scope.hobby2=hobby;
+  })
+}]);
+//echarsController
+app.controller('echartsController',['$scope','$http',function($scope,$http){
+   function onClick(params){
+        console.log(params);
+    };            
+    $scope.lineConfig = {
+        theme:'default',
+        event: [{click:onClick}],
+        dataLoaded:true
+    };
+    $scope.lineOption1 = {
+       title: {
+            text: 'ECharts demo1'
+        },
+        tooltip: {},
+        legend: {
+            data:['销量']
+        },
+        xAxis: {
+            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar'
+        }]
+    };
+    $scope.lineOption2 = {
+       title: {
+            text: 'ECharts demo2'
+        },
+        tooltip: {},
+        legend: {
+            data:['销量']
+        },
+        xAxis: {
+            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        },
+        yAxis: {},
+        series: [{
+            roseType: 'radius',
+            label: {
+                normal: {
+                    textStyle: {
+                        color: 'rgba(255, 255, 255, 0.3)'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    lineStyle: {
+                        color: 'rgba(255, 255, 255, 0.3)'
+                    },
+                    smooth: 0.2,
+                    length: 10,
+                    length2: 20
+                }
+            },
+            name: '销量',
+            type: 'pie'
+        }]
+    };
+    $scope.lineOption3 = {
+       title: {
+            text: 'ECharts demo3'
+        },
+        tooltip: {},
+        legend: {
+            data:['销量']
+        },
+        xAxis: {
+            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'line'
+        }]
+    };
+    $scope.refreshChart=function(){
+      getEchartsData();
+    };
+    function getEchartsData(){
+      $http({
+        method:"GET",
+        url:BASEURL+"echartsData"
+      }).success(function(data,status,headers,config){      
+        $scope.lineOption1.series[0].data=data.message;
+        $scope.lineOption2.series[0].data=data.message;
+        $scope.lineOption3.series[0].data=data.message;
+      }).error(function(data,status,headers,config){
+        alert(data);
+      })
+    };
+    getEchartsData();
+}])
 </script>
 <script type="text/javascript" src="src/js/route.js"></script>
 <script type="text/javascript" src="src/directive/nl-tab/nl-tabs.js"></script>
+
 </body>
 </html>

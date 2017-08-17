@@ -12,7 +12,7 @@
 	.parentItem{margin-top:10px;}
 	</style>
 	<div class="ctrlCard" ng-controller="parentCtrl1">
-		<h3>父控制器-子控制器</h3>
+		<h3>父控制器-子控制器（scope传递）</h3>
 		<div class="parentCtrl">
 			<h5 class="parentCtrlTitle">父控制器</h5>
 			<div>
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	<div class="ctrlCard" ng-controller="parentCtrl2">
-		<h3>父控制器-子指令</h3>
+		<h3>父控制器-子指令（scope传递）</h3>
 		<div class="parentCtrl">
 			<h5 class="parentCtrlTitle">父控制器</h5>
 			<div class="parentItem">
@@ -55,6 +55,52 @@
 				<my-directive></my-directive>
 				<my-directive1></my-directive1>
 				<my-directive2 dream3="dream3" dream4="dream4"></my-directive2>
+			</div>
+		</div>
+	</div>
+	<div class="ctrlCard" ng-controller="parentCtrl3">
+		<h3>子控制器——>父控制器（event传递：$emit）</h3>
+		<div class="parentCtrl">
+			<h5 class="parentCtrlTitle">父控制器</h5>
+			<div>
+			    父亲的爱好(基本类型):<input type="text" ng-model="hobby1"/>
+			</div>
+			<div style="margin-top:10px">
+				父亲的爱好(引用类型):<input type="text" ng-model="hobby2.hobby"/>
+			</div>
+			<div class="childCtrl" ng-controller="childCtrl3">
+				<h6 class="childCtrlTitle">子控制器(未初始化dream)</h6>
+				<ul>
+					<li  class="childItem">
+						儿子的爱好是(继承父亲,基本类型) :<input type="text" ng-model="hobby1"> <button type="button" class="btn btn-primary" ng-click="emitParentCtrl1()">emit到父亲吧！</button></br/>
+					</li>
+					<li  class="childItem">
+						儿子的爱好是(继承父亲,引用类型) :<input type="text" ng-model="hobby2.hobby"> <button type="button" class="btn btn-primary" ng-click="emitParentCtrl2()">emit到父亲吧！</button> 注意：此时把{"hobby":""}对象传递给父，若只是传递值就不会父子连接</br/>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="ctrlCard" ng-controller="parentCtrl4">
+		<h3>父控制器——>子控制器（event传递：$broadcast）</h3>
+		<div class="parentCtrl">
+			<h5 class="parentCtrlTitle">父控制器</h5>
+			<div>
+			    父亲的爱好(基本类型):<input type="text" ng-model="hobby1"/>&nbsp&nbsp<button type="button" class="btn btn-danger" ng-click="broadcastChild1()">boadcast到儿子吧！</button>
+			</div>
+			<div style="margin-top:10px">
+				父亲的爱好(引用类型):<input type="text" ng-model="hobby2.hobby"/>&nbsp&nbsp<button type="button" class="btn btn-danger" ng-click="broadcastChild2()">boadcast到儿子吧！</button> 注意：此时把{"hobby":""}对象传递给儿子，若只是传递值就不会父子连接
+			</div>
+			<div class="childCtrl" ng-controller="childCtrl4">
+				<h6 class="childCtrlTitle">子控制器(未初始化dream)</h6>
+				<ul>
+					<li  class="childItem">
+						儿子的爱好是(继承父亲,基本类型) :<input type="text" ng-model="hobby1"></br/>
+					</li>
+					<li  class="childItem">
+						儿子的爱好是(继承父亲,引用类型) :<input type="text" ng-model="hobby2.hobby"> </br/>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
