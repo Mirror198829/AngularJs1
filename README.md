@@ -14,6 +14,7 @@
 * 模态框ng-dialog:https://github.com/likeastore/ngDialog
 * 路由 ui-router :https://ui-router.github.io/ng1/tutorial/hellogalaxy (API)  https://github.com/angular-ui/ui-router
 * ng-table: http://ng-table.com/#/
+* ng-echarts:https://github.com/liekkas/ng-echarts
 # AngualrJs生态圈
 * Angular中文社区：http://www.angularjs.cn/A0a6
 # AngularJs1 知识点wiki
