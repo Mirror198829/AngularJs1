@@ -29,7 +29,7 @@ var app = angular.module('myApp',['nlEcharts']);
 html：
 ``` html
 <div ng-controller="echartsController">
-	  <nl-echarts class="col-md-4 echartCss" nl-config="lineConfig" nl-option="lineOption3"></nl-echarts>
+	<nl-echarts class="col-md-4 echartCss" nl-config="lineConfig" nl-option="lineOption3"></nl-echarts>
 </div>
 ```
 js控制器中初始配置
@@ -63,6 +63,22 @@ app.controller('echartsController',['$scope',function($scope){
     };
 }])
 ```
+## nl-icheck
+引入相关文件:
+``` html
+<link rel="stylesheet" href="node_modules/icheck/skins/flat/blue.css" >
+<script type="text/javascript" src="node_modules/icheck/icheck.min.js"></script>
+<script type="text/javascript" src="src/directive/nl-icheck/nl-icheck.js"></script>
+```
+ng引入模块
+``` javascript
+var app = angular.module('myApp',['nlIcheck']);
+```
+html使用:
+``` html
+<input id="ng1" ng-checked="true" nl-icheck type="radio" ng-model="userdata.frame" name="sex" value="AngularJs1">
+```
+
 # AngualrJs生态圈
 * Angular中文社区：http://www.angularjs.cn/A0a6
 # AngularJs1 知识点wiki
