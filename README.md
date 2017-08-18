@@ -2,7 +2,7 @@
 * 下载工程依赖
 `cnpm install`
 * 在工程根目录启动mock数据
-`node mock.js`
+`node mock.js`  (页面数据通过$http进行请求)
 
 # AngualrJs API查询地址
 * 英文文档：https://code.angularjs.org/1.5.11/docs/api  (推荐)
@@ -15,6 +15,54 @@
 * 路由 ui-router :https://ui-router.github.io/ng1/tutorial/hellogalaxy (API)  https://github.com/angular-ui/ui-router
 * ng-table: http://ng-table.com/#/
 * ng-echarts:https://github.com/liekkas/ng-echarts
+# AngualrJs组件使用说明
+## nl-echarts 
+引入相关文件
+``` html
+<script type="text/javascript" src="node_modules/echarts/dist/echarts.min.js"></script>
+<script type="text/javascript" src="src/directive/nl-echarts/nl-echarts.js"></script>
+```
+ng引入模块
+``` javascript
+var app = angular.module('myApp',['nlEcharts']);
+```
+html：
+``` html
+<div ng-controller="echartsController">
+	  <nl-echarts class="col-md-4 echartCss" nl-config="lineConfig" nl-option="lineOption3"></nl-echarts>
+</div>
+```
+js控制器中初始配置
+``` javascript
+//echarsController
+app.controller('echartsController',['$scope',function($scope){
+   function onClick(params){
+        console.log(params);
+    };            
+    $scope.lineConfig = {
+        theme:'default',
+        event: [{click:onClick}],
+        dataLoaded:true
+    };
+    $scope.lineOption1 = {
+       title: {
+            text: 'ECharts demo1'
+        },
+        tooltip: {},
+        legend: {
+            data:['销量']
+        },
+        xAxis: {
+            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar'
+        }]
+    };
+}])
+```
 # AngualrJs生态圈
 * Angular中文社区：http://www.angularjs.cn/A0a6
 # AngularJs1 知识点wiki
