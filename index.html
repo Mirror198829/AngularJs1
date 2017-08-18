@@ -8,6 +8,7 @@
   <link rel="stylesheet" type="text/css" href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
  <link rel="stylesheet" href="node_modules/icheck/skins/flat/blue.css" >
  <link rel="stylesheet" type="text/css" href="src/css/angular-nl.css">
+ <link rel="stylesheet" type="text/css" href="libs/jedate/skin/jedate.css">
 	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="node_modules//bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
@@ -16,7 +17,8 @@
   <script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
   <script type="text/javascript" src="node_modules/icheck/icheck.min.js"></script>
   <script type="text/javascript" src="node_modules/echarts/dist/echarts.min.js"></script>
-  <script type="text/javascript" src="node_modules/ng-echarts/dist/ng-echarts.js"></script>
+  <script type="text/javascript" src="src/directive/nl-echarts/nl-echarts.js"></script>
+  <script type="text/javascript" src="libs/jedate/jquery.jedate.min.js"></script>
 	<style type="text/css">	 
    body{overflow-y: scroll} 
    .clearfix{ zoom:1;} 
@@ -73,7 +75,7 @@
 </div>
 <script>
 var BASEURL="http://localhost:3000/";
-var app = angular.module('myApp',['ui.router','ui.bootstrap','ng-echarts','nlTabs']);
+var app = angular.module('myApp',['ui.router','ui.bootstrap','nlEcharts','nlTabs']);
 app.controller('personCtrl',['$scope','$location','$uibModal','$http', function($scope,$location,$uibModal,$http) {
   $scope.alerts = [];
   $scope.addAlert = function () {

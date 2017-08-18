@@ -2,6 +2,18 @@
 <style>
 .echartCss{height:400px;}
 </style>
+    <h3>日期组件</h3>
+    <div>
+		<input class="workinput wicon" id="test1" type="text" placeholder="YYYY年MM月DD日 hh:mm:ss" readonly>
+	<script type="text/javascript">
+	$("#test1").jeDate({
+	    isinitVal:true,
+	    festival: true,
+	    format: 'YYYY年MM月DD日 hh:mm:ss'
+    });
+    </script>
+    </div>
+    <hr/>
 	<h3>Tab组件</h3>
 	<nl-tabs tabs-data="tabsData"></nl-tabs>
 	<hr/>
@@ -50,12 +62,17 @@
 		    ng-change="changePage()"></ul>
 	    </div>
 	</div>
+	<hr/>
 	<h3>echarts指令</h3>
 	<div ng-controller="echartsController">
 		 <div><button ng-click="refreshChart()" class="btn btn-primary">切换数据</button></div>
-	     <ng-echarts class="col-md-4 echartCss" ec-config="lineConfig" ec-option="lineOption1"></ng-echarts>
-	     <ng-echarts class="col-md-4 echartCss" ec-config="lineConfig" ec-option="lineOption2"></ng-echarts>
-	     <ng-echarts class="col-md-4 echartCss" ec-config="lineConfig" ec-option="lineOption3"></ng-echarts>
+	     <nl-echarts class="col-md-4 echartCss" nl-config="lineConfig" nl-option="lineOption1"></nl-echarts>
+	     <nl-echarts class="col-md-4 echartCss" nl-config="lineConfig" nl-option="lineOption2"></nl-echarts>
+	     <nl-echarts class="col-md-4 echartCss" nl-config="lineConfig" nl-option="lineOption3"></nl-echarts>
 	</div>
+
+	
+
+
 </div>
 
