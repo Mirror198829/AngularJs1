@@ -16,7 +16,7 @@
 * ng-table: http://ng-table.com/#/
 * ng-echarts:https://github.com/liekkas/ng-echarts
 # AngualrJs组件使用说明
-## nl-echarts 
+## nl-echarts  echarts组件
 引入相关文件
 ``` html
 <script type="text/javascript" src="node_modules/echarts/dist/echarts.min.js"></script>
@@ -63,7 +63,7 @@ app.controller('echartsController',['$scope',function($scope){
     };
 }])
 ```
-## nl-icheck
+## nl-icheck  icheck组件
 引入相关文件:
 ``` html
 <link rel="stylesheet" href="node_modules/icheck/skins/flat/blue.css" >
