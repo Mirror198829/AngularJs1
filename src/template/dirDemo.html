@@ -1,17 +1,20 @@
 <div id="directiveWrap" ng-controller="directiveCtrl">
 <style>
-.echartCss{height:400px;}
+*{margin:0;padding:0;}
+.echartCss{height:100%;width: 100%;}
+.chartItem{padding:0 5px;}
+.chartHead{padding-left:15px;color:#fff;height:40px;line-height:40px;background-color: #7ec2f3;}
+.chartBody{height:320px;width: 100%;}
 </style>
+    <h3>提示组件</h3>
+    <button type="button" class="btn btn-success" ng-click="showNotice({text:'我是成功的信息',type:'success'})">（成功）Success</button>
+    <button type="button" class="btn btn-primary" ng-click="showNotice({text:'我是提示的信息',type:'info'})">（一般信息）Info</button>
+    <button type="button" class="btn btn-warning" ng-click="showNotice({text:'我是警告的信息',type:'warning'})">（警告）Warning</button>
+    <button type="button" class="btn btn-danger"  ng-click="showNotice({text:'我是错误信息的样子',type:'error'})">（危险）Danger</button>
+    <hr/>
     <h3>日期组件</h3>
     <div>
-		<input class="workinput wicon" id="test1" type="text" placeholder="YYYY年MM月DD日 hh:mm:ss" readonly>
-	<script type="text/javascript">
-	$("#test1").jeDate({
-	    isinitVal:true,
-	    festival: true,
-	    format: 'YYYY年MM月DD日 hh:mm:ss'
-    });
-    </script>
+		<input nl-jedate nl-jedateoption="jedateoption" class="workinput wicon" id="test1" type="text" placeholder="YYYY年MM月DD日 hh:mm:ss" readonly>
     </div>
     <hr/>
 	<h3>Tab组件</h3>
@@ -65,14 +68,33 @@
 	<hr/>
 	<h3>echarts指令</h3>
 	<div ng-controller="echartsController">
-		 <div><button ng-click="refreshChart()" class="btn btn-primary">切换数据</button></div>
-	     <nl-echarts class="col-md-4 echartCss" nl-config="lineConfig" nl-option="lineOption1"></nl-echarts>
-	     <nl-echarts class="col-md-4 echartCss" nl-config="lineConfig" nl-option="lineOption2"></nl-echarts>
-	     <nl-echarts class="col-md-4 echartCss" nl-config="lineConfig" nl-option="lineOption3"></nl-echarts>
+		 <div style="margin-bottom:10px;margin-left: 5px"><button ng-click="refreshChart()" class="btn btn-primary">切换数据</button></div>
+		 <div>
+			<div class="col-md-4 chartItem">
+				<div class="panel panel-primary">
+					<div class="panel-heading">柱状图</div>
+					<div class="chartBody panel-body">
+						<nl-echarts class="col-md-12 echartCss" nl-config="lineConfig" nl-option="lineOption1"></nl-echarts>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 chartItem">
+				<div class="panel panel-primary">
+					<div class="panel-heading">饼图</div>
+					<div class="chartBody panel-body">
+						 <nl-echarts class="col-md-12 echartCss" nl-config="lineConfig" nl-option="lineOption2"></nl-echarts>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 chartItem">
+				<div class="panel panel-primary">
+					<div class="panel-heading">折线图</div>
+					<div class="chartBody panel-body">
+						<nl-echarts class="col-md-12 echartCss" nl-config="lineConfig" nl-option="lineOption3"></nl-echarts>
+					</div>
+				</div>
+			</div>
+		 </div>	    
 	</div>
-
-	
-
-
 </div>
 
