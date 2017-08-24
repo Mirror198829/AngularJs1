@@ -38,7 +38,7 @@ angular.module('myService',[])
               noticeIcon,
               '" style="position: absolute;left:10px;top:13px;font-size: 16px;"></i>',
               optionTxt,
-             '<i class="glyphicon glyphicon-remove" style="position: absolute;right: 10px;top:13px;cursor: pointer;font-size: 16px;" onclick="document.body.removeChild(this.parentNode.parentNode)"></i></div>'].join('');
+             '<i class="glyphicon glyphicon-remove" style="position: absolute;right: 10px;top:13px;cursor: pointer;font-size: 16px;" onclick="event.stopPropagation();document.body.removeChild(this.parentNode.parentNode)"></i></div>'].join('');
         htmlWrap.innerHTML=HTML;
         htmlWrap.id="promptBox";
         document.body.appendChild(htmlWrap);

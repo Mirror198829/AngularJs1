@@ -23,7 +23,7 @@
   <script type="text/javascript" src="src/service/myService.js"></script>
 	<style type="text/css">	 
    body{overflow-y: scroll} 
-   .clearfix{ zoom:1;} 
+   .clearfix{ zoom:1;}no
    .clearfix:after{ content:''; display:block; clear:both;}
    ul,li{list-style: none;padding:0;margin:0;}
    #viewContainer,#navcontainer{width: 80%;margin:0 auto;}
@@ -375,7 +375,15 @@ app.directive('nlJedate',function(){
     }
   }
 });
-
+// 路由页面控制器
+app.controller('viewController',['$scope','$state',function($scope,$state){
+  $scope.goToNg=function(){
+    $state.go('uiView.ng',{id:'我是通过$state.go()传递的参数'})
+  }
+}]);
+app.controller('ngController',['$scope','$stateParams',function($scope,$stateParams){
+  $scope.Id=$stateParams.id;
+}])
 </script>
 <script type="text/javascript" src="src/js/route.js"></script>
 <script type="text/javascript" src="src/directive/nl-tab/nl-tabs.js"></script>
