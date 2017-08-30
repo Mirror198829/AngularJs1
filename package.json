@@ -4,7 +4,8 @@
   "description": "Angularjs Home Page",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "live-server --port=9090"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "express": "4.15.3",
     "icheck": "^1.0.2",
     "jquery": "^3.2.1",
+    "live-server": "^1.2.0",
     "mockjs": "^1.0.1-beta3",
     "ng-echarts": "^3.0.1"
   },
