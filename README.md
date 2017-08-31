@@ -1,8 +1,10 @@
 # Usage
-* 下载工程依赖
-`cnpm install`
-* 在工程根目录启动mock数据
+1. 下载工程依赖<br/>
+`npm install`或者`cnpm install`
+2. 在工程根目录启动mock数据 <br/>
 `node mock.js`  (页面数据通过$http进行请求)
+3. 在工程目录热加载启动页面<br/>
+`npm run serve`
 
 # AngualrJs API查询地址
 * 英文文档：https://code.angularjs.org/1.5.11/docs/api  (推荐)
