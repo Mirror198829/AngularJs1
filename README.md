@@ -85,4 +85,4 @@ html使用:
 # AngualrJs生态圈
 * Angular中文社区：http://www.angularjs.cn/A0a6
 # AngularJs1 知识点wiki
-https://github.com/Mirror198829/AngularJs/wiki/AngularJS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB
+https://github.com/Mirror198829/AngularJs1/wiki
