@@ -9,6 +9,7 @@
  <link rel="stylesheet" href="node_modules/icheck/skins/flat/blue.css" >
  <link rel="stylesheet" type="text/css" href="src/css/angular-nl.css">
  <link rel="stylesheet" type="text/css" href="libs/jedate/skin/jedate.css">
+ <link rel="stylesheet" type="text/css" href="node_modules/angular-ui-grid/ui-grid.min.css" />
 	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="node_modules//bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
@@ -21,6 +22,8 @@
   <script type="text/javascript" src="libs/jedate/jquery.jedate.min.js"></script>
   <script type="text/javascript" src="src/directive/nl-icheck/nl-icheck.js"></script>
   <script type="text/javascript" src="src/service/myService.js"></script>
+  <script src="node_modules/angular-ui-grid/ui-grid.min.js"></script>
+
 	<style type="text/css">	 
    body{overflow-y: scroll;} 
    .clearfix{ zoom:1;}no
@@ -77,7 +80,7 @@
 </div>
 <script>
 var BASEURL="http://localhost:3000/";
-var app = angular.module('myApp',['ui.router','ui.bootstrap','nlEcharts','nlTabs','nlIcheck','myService']);
+var app = angular.module('myApp',['ui.router','ui.bootstrap','nlEcharts','nlTabs','nlIcheck','myService','ui.grid','ui.grid.pagination']);
 app.controller('personCtrl',['$scope','$location','$uibModal','$http', function($scope,$location,$uibModal,$http) {
   $scope.alerts = [];
   $scope.addAlert = function () {
@@ -128,6 +131,25 @@ app.controller("formCtrl",['$scope',function($scope){
 
 //指令页面的Ctrl
 app.controller('directiveCtrl',['$scope','$http','$notice',function($scope,$http,$notice){
+  $scope.gridOptions1 = {
+    //onRegisterApi: registerGridApi,
+    useCustomPagination: false,
+    //-------- 分页属性 ----------------
+    enablePagination: true, //是否分页，默认为true
+    enablePaginationControls: true, //使用默认的底部分页
+    paginationPageSizes: [10, 15, 30], //每页显示个数可选项
+    paginationCurrentPage:1, //当前页码
+    paginationPageSize:30, //每页显示个数    totalItems:100,
+    totalItems : 5000, // 总数量
+    useExternalPagination: true,//是否使用分页按钮
+    columnDefs: [
+      { name: 'name', enableSorting: false },
+      { name: 'gender', enableSorting: false },
+      { name: 'company', enableSorting: false }
+    ]
+  };
+
+   
   $scope.jedateoption={
     skinCell:"jedateblue",                      //日期风格样式，默认蓝色
     format:"YYYY-MM-DD hh:mm:ss",               //日期格式

@@ -20,6 +20,7 @@
   "devDependencies": {
     "angular": "1.5.11",
     "angular-ui-bootstrap": "^2.5.0",
+    "angular-ui-grid": "^4.0.6",
     "angular-ui-router": "^1.0.3",
     "bootstrap": "^3.3.7",
     "echarts": "^3.6.2",
@@ -27,8 +28,7 @@
     "icheck": "^1.0.2",
     "jquery": "^3.2.1",
     "live-server": "^1.2.0",
-    "mockjs": "^1.0.1-beta3",
-    "ng-echarts": "^3.0.1"
+    "mockjs": "^1.0.1-beta3"
   },
   "dependencies": {}
 }
