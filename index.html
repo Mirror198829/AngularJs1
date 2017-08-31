@@ -31,6 +31,7 @@
    ul,li{list-style: none;padding:0;margin:0;}
    #viewContainer,#navcontainer{width: 80%;margin:0 auto;}
    .innerCtr{background-color: #3598db;padding:20px;box-sizing: border-box;margin:10px 0;color:#333;border-radius: 3px}
+   .cellYellow{background-color:yellow !important;color:red;}
 	</style>
 </head>
 <body>
@@ -80,7 +81,7 @@
 </div>
 <script>
 var BASEURL="http://localhost:3000/";
-var app = angular.module('myApp',['ui.router','ui.bootstrap','nlEcharts','nlTabs','nlIcheck','myService','ui.grid','ui.grid.pagination']);
+var app = angular.module('myApp',['ui.router','ui.bootstrap','nlEcharts','nlTabs','nlIcheck','myService','ui.grid','ui.grid.pagination','ui.grid.edit', 'ui.grid.selection']);
 app.controller('personCtrl',['$scope','$location','$uibModal','$http', function($scope,$location,$uibModal,$http) {
   $scope.alerts = [];
   $scope.addAlert = function () {
@@ -130,10 +131,25 @@ app.controller("formCtrl",['$scope',function($scope){
 }]);
 
 //指令页面的Ctrl
-app.controller('directiveCtrl',['$scope','$http','$notice',function($scope,$http,$notice){
+app.controller('directiveCtrl',['$scope','$http','$notice','uiGridConstants',function($scope,$http,$notice, uiGridConstants){
+  var getPage=function(){
+    alert(123)
+  }
   $scope.gridOptions1 = {
-    //onRegisterApi: registerGridApi,
-    useCustomPagination: false,
+    //-------- 行选择 ----------------
+    enableRowSelection: true,
+    enableSelectAll: true,
+    multiSelect:false, // 是否可多选行
+    useCustomPagination: false, //是否使用前台分页，重要
+    //-------- 过滤属性 ----------------
+    enableFiltering:true, //是否过滤，可以写在columnDefs的单列中
+    //-------- footer属性 ----------------
+    showGridFooter: false,
+    showColumnFooter: true, //是否显示列下最后总结的行，结合uiGridConstants在columnDefs中使用
+    //-------- 表格头部 ----------------
+    enableGridMenu: true, //是否显示头部右侧删选控件
+    //-------- 表格内是否可编辑 ----------------
+    enableCellEdit:true,
     //-------- 分页属性 ----------------
     enablePagination: true, //是否分页，默认为true
     enablePaginationControls: true, //使用默认的底部分页
@@ -142,14 +158,54 @@ app.controller('directiveCtrl',['$scope','$http','$notice',function($scope,$http
     paginationPageSize:30, //每页显示个数    totalItems:100,
     totalItems : 5000, // 总数量
     useExternalPagination: true,//是否使用分页按钮
+    onRegisterApi: function(gridApi) {
+      $scope.gridApi = gridApi;
+      //分页按钮事件
+      gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {
+        $scope.getGridData();
+      });
+    },
     columnDefs: [
-      { name: 'name', enableSorting: false },
-      { name: 'gender', enableSorting: false },
-      { name: 'company', enableSorting: false }
-    ]
+      { field:'id',displayName:'ID',
+        enableSorting:false, //是否排序
+        cellClass:'cellYellow',  //设置table中此列的样式
+      },
+      { field:'name',displayName:'Name',enableFiltering: false,enableCellEdit:true},
+      { field:'sex',
+        displayName:'Sex',
+        filter: {
+          type: uiGridConstants.filter.SELECT,
+          selectOptions: [ { value: '男', label: '男' }, { value: '女', label: '女' }]
+        }, 
+        editableCellTemplate: 'ui-grid/dropdownEditor', //可编辑的状态下拉选项
+        editDropdownValueLabel: 'sex',//可编辑：与editDropdownOptionsArray中key值对应
+        editDropdownOptionsArray: [
+          { id: '男', sex: '男' },
+          { id: '女', sex: '女' }
+        ]       
+      },
+      {field:'age',displayName:'Age',aggregationType: uiGridConstants.aggregationTypes.min,type: 'number',},
+      {field:'company',displayName:'Company',footerCellTemplate: '<div class="ui-grid-cell-contents" style="background-color: Red;color: White">custom template</div>'},
+      { name: 'edit', displayName: 'Edit', 
+        cellTemplate: '<button type="button" class="btn btn-primary" ng-click="grid.appScope.edit(row.entity)" >get当前行ID</button> ',
+        enableCellEdit:false
+      }
+    ] 
   };
-
-   
+  $scope.edit=function(val){
+    alert(val.id)
+  };
+  $scope.getGridData=function(){
+     $http({
+        method:"GET",
+        url:BASEURL+"gridData"
+      }).success(function(data,status,headers,config){
+        $scope.gridOptions1.data=data.message;
+      }).error(function(data,status,headers,config){
+        alert(data);
+      })
+  };
+  $scope.getGridData();
   $scope.jedateoption={
     skinCell:"jedateblue",                      //日期风格样式，默认蓝色
     format:"YYYY-MM-DD hh:mm:ss",               //日期格式

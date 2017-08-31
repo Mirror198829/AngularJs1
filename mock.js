@@ -22,6 +22,19 @@ app.get('/echartsData', function (req, res) {
 		"message": [Math.floor(Math.random()*80)+20,Math.floor(Math.random()*80)+20,Math.floor(Math.random()*80)+20,Math.floor(Math.random()*80)+20,Math.floor(Math.random()*80)+20,Math.floor(Math.random()*80)+20]
 	})); 
 });
+app.get('/gridData', function (req, res) { 
+	res.header("Access-Control-Allow-Origin", "*"); //设置跨域访问 
+	res.json(Mock.mock({ 
+	    "stats":"success", 
+		"message|10": [{
+			"id":"@id",
+			"name":"@cname",
+			"sex|1":['男','女'],
+			"age|20-35":0,
+			"company|1":['百度','阿里巴巴','华为','新大陆','腾讯','网易']
+		}]
+	})); 
+});
 let server=app.listen('3000',function(){
 	let host=server.address().address;
 	let port=server.address().port;
