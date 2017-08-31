@@ -17,6 +17,7 @@
 * 路由 ui-router :https://ui-router.github.io/ng1/tutorial/hellogalaxy (API)  https://github.com/angular-ui/ui-router
 * ng-table: http://ng-table.com/#/
 * ng-echarts:https://github.com/liekkas/ng-echarts
+* ui-grid: http://ui-grid.info/docs (棒棒的！)
 # AngualrJs组件使用说明
 ## nl-echarts  echarts组件
 引入相关文件
