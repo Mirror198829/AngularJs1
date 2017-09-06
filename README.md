@@ -19,13 +19,26 @@
 * ng-echarts:https://github.com/liekkas/ng-echarts
 * ui-grid: http://ui-grid.info/docs (棒棒的！)
 # AngualrJs组件使用说明
-## ui-grid  
+## ui-grid 
+### usage
 下载依赖<br/>
-`npm install angular-ui-grid`
-引入文件
-`<link rel="stylesheet" type="text/css" href="node_modules/angular-ui-grid/ui-grid.min.css" />`
-`<script src="node_modules/angular-ui-grid/ui-grid.min.js"></script>`
-
+`npm install angular-ui-grid` <br/>
+引入文件<br/>
+`<link rel="stylesheet" type="text/css" href="node_modules/angular-ui-grid/ui-grid.min.css" />` <br/>
+`<script src="node_modules/angular-ui-grid/ui-grid.min.js"></script>` <br/>
+html:
+```html
+<div class="gridStyle" ui-grid="gridOptions1" ui-grid-pagination ui-grid-edit ui-grid-selection ui-grid-move-columns ui-grid-resizeColumns ui-grid-resize-columns></div>
+```
+js:<br/>
+` $scope.gridOptions1 = {} `
+### 相关指令
+* ui-grid-edit: grid 编辑指令；
+* ui-gird-pagination : grid 分页指令；
+* ui-grid-selection : grid 选择行所需指令；
+* ui-grid-exporter : grid 导出功能所需指令；
+* ui-grid-resize-columns: grid 列宽可以拉伸所需指令；
+* ui-grid-auto-resize : 解决grid布局 自动适应div 高度和宽度问题（非常有用）；
 ## nl-echarts  echarts组件
 引入相关文件
 ``` html
