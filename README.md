@@ -39,6 +39,7 @@ js:<br/>
 * ui-grid-exporter : grid 导出功能所需指令；
 * ui-grid-resize-columns: grid 列宽可以拉伸所需指令；
 * ui-grid-auto-resize : 解决grid布局 自动适应div 高度和宽度问题（非常有用）；
+* ui-grid-pinning:固定列
 ## nl-echarts  echarts组件
 引入相关文件
 ``` html
