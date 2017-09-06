@@ -1,8 +1,10 @@
 # Usage
-* 下载工程依赖
-`cnpm install`
-* 在工程根目录启动mock数据
+1. 下载工程依赖<br/>
+`npm install`或者`cnpm install`
+2. 在工程根目录启动mock数据 <br/>
 `node mock.js`  (页面数据通过$http进行请求)
+3. 在工程目录热加载启动页面<br/>
+`npm run serve`
 
 # AngualrJs API查询地址
 * 英文文档：https://code.angularjs.org/1.5.11/docs/api  (推荐)
@@ -15,6 +17,7 @@
 * 路由 ui-router :https://ui-router.github.io/ng1/tutorial/hellogalaxy (API)  https://github.com/angular-ui/ui-router
 * ng-table: http://ng-table.com/#/
 * ng-echarts:https://github.com/liekkas/ng-echarts
+* ui-grid: http://ui-grid.info/docs (棒棒的！)
 # AngualrJs组件使用说明
 ## nl-echarts  echarts组件
 引入相关文件
@@ -82,4 +85,4 @@ html使用:
 # AngualrJs生态圈
 * Angular中文社区：http://www.angularjs.cn/A0a6
 # AngularJs1 知识点wiki
-https://github.com/Mirror198829/AngularJs/wiki/AngularJS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB
+https://github.com/Mirror198829/AngularJs1/wiki
