@@ -32,6 +32,9 @@
    #viewContainer,#navcontainer{width: 80%;margin:0 auto;}
    .innerCtr{background-color: #3598db;padding:20px;box-sizing: border-box;margin:10px 0;color:#333;border-radius: 3px}
    .cellYellow{background-color:yellow !important;color:red;}
+   .cellInfo{background-color: #20a0ff;}
+   .cellRed{background-color: #ff4949;}
+   .cellClass{padding:5px 10px;border-radius: 5px;margin:5px;width:60px;color:#fff;font-size: 12px;cursor: pointer;}
 	</style>
 </head>
 <body>
@@ -83,7 +86,7 @@
 
 
 var BASEURL="http://localhost:3000/";
-var app = angular.module('myApp',['ui.router','ui.bootstrap','nlEcharts','nlTabs','nlIcheck','myService','ui.grid','ui.grid.pagination','ui.grid.edit', 'ui.grid.selection','ui.grid.moveColumns','ui.grid.resizeColumns','ui.grid.autoResize']);
+var app = angular.module('myApp',['ui.router','ui.bootstrap','nlEcharts','nlTabs','nlIcheck','myService','ui.grid','ui.grid.pagination','ui.grid.edit', 'ui.grid.selection','ui.grid.moveColumns','ui.grid.resizeColumns','ui.grid.autoResize','ui.grid.pinning']);
 app.controller('personCtrl',['$scope','$location','$uibModal','$http', function($scope,$location,$uibModal,$http) {
   $scope.alerts = [];
   $scope.addAlert = function () {
@@ -137,20 +140,27 @@ app.controller('directiveCtrl',['$scope','$http','$notice','uiGridConstants',fun
   var getPage=function(){
     alert(123)
   }
+  $scope.getSelectData=function(){
+    let selectPersons=$scope.gridApi.selection.getSelectedRows();
+    selectPersons.forEach(function(item,index){
+      selectPersons[index].tag=true;
+    });
+  };
   $scope.gridOptions1 = {
     //-------- 选中 ----------------
     enableRowSelection: true, //是否可选中行，默认值:true
     enableSelectAll: true,//是否可全选
     multiSelect:true, // 是否可多选行    
-    enableFullRowSelection : true,//是否点击行任意位置后选中,默认为false,当为true时，checkbox可以显示但是不可选中
-    enableFooterTotalSelected: true, // 是否显示选中的总数，默认为true, 如果显示，showGridFooter 必须为true
+    enableFullRowSelection : false,//是否点击行任意位置后选中,默认为false,当为true时，checkbox可以显示但是不可选中
+    enableFooterTotalSelected: false, // 是否显示选中的总数，默认为true, 如果显示，showGridFooter 必须为true
     enableRowHeaderSelection : true, //是否显示选中checkbox框 ,默认为true
-    enableSelectionBatchEvent : true, //默认true
+    enableSelectionBatchEvent : false, //默认true
     isRowSelectable: function(row){ //GridRow
-       if(row.entity.sex == '女'){
+       /*if(row.entity.sex == '女'){
            row.grid.api.selection.selectRow(row.entity); // 选中行
-       }
+       }*/
     },  //用于初始化显示选中数据
+    rowHeight:40, //设置行高度
     noUnselect: false,//默认false,选中后是否可以取消选中，false表示可以取消选中
     //selectionRowHeaderWidth:30 ,//默认30 ，设置选择列的宽度；
     
@@ -162,7 +172,7 @@ app.controller('directiveCtrl',['$scope','$http','$notice','uiGridConstants',fun
     //-------- 表格头部 ----------------
     enableGridMenu: true, //是否显示头部右上侧删选控件
     //-------- 表格内是否可编辑 ----------------
-    enableCellEdit:true,
+    enableCellEdit:false,
     //-------- 分页属性 ----------------
     useCustomPagination: false, //是否使用前台分页，默认值：true；使用后台分页，设置为false
     enablePaginationControls: true, //使用显示默认的底部分页
@@ -176,19 +186,22 @@ app.controller('directiveCtrl',['$scope','$http','$notice','uiGridConstants',fun
     onRegisterApi: function(gridApi) {
       $scope.gridApi = gridApi;
       //分页按钮事件
-      gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {
+      $scope.gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {
         $scope.getGridData();
       });
 
       //行选中事件
       $scope.gridApi.selection.on.rowSelectionChanged($scope,function(row,event){
-          console.log(row.entity)
+          //console.log(row.entity);
        });
     },
     columnDefs: [
-      { field:'id',displayName:'ID',
+      { field:'id',
+        displayName:'身份证号',//显示的名称
         enableSorting:false, //是否排序
+        //pinnedRight:true, //固定右边栏位置
         cellClass:'cellYellow',  //设置table中此列的样式
+        //width:300,
         cellTooltip: function( row, col ) {
           return 'Name: ' + row.entity.name + ' Company: ' + row.entity.company;
         }, 
@@ -196,9 +209,15 @@ app.controller('directiveCtrl',['$scope','$http','$notice','uiGridConstants',fun
           return 'Header: ' + col.displayName;
         }
       },
-      { field:'name',displayName:'Name',enableFiltering: false,enableCellEdit:true},
+      { field:'name',
+        displayName:'姓名',
+        enableFiltering: false,
+        enableCellEdit:true,
+        //pinnedLeft:true, //固定左边栏位置
+        //width:100
+      },
       { field:'sex',
-        displayName:'Sex',
+        displayName:'性别',
         filter: {
           type: uiGridConstants.filter.SELECT,
           selectOptions: [ { value: '男', label: '男' }, { value: '女', label: '女' }]
@@ -208,18 +227,47 @@ app.controller('directiveCtrl',['$scope','$http','$notice','uiGridConstants',fun
         editDropdownOptionsArray: [
           { id: '男', sex: '男' },
           { id: '女', sex: '女' }
-        ]       
+        ],
+        //width:60       
       },
-      {field:'age',displayName:'Age',aggregationType: uiGridConstants.aggregationTypes.min,type: 'number',},
-      {field:'company',displayName:'Company',footerCellTemplate: '<div class="ui-grid-cell-contents" style="background-color: Red;color: White">custom template</div>'},
-      { name: 'edit', displayName: 'Edit', 
-        cellTemplate: '<div class="ui-grid-cell-contents"><button type="button" class="btn btn-primary btn-sm" ng-click="grid.appScope.edit(row.entity)" >get当前行ID</button></div> ',
-        enableCellEdit:false
+      { field:'age',
+        displayName:'年龄',
+        aggregationType: uiGridConstants.aggregationTypes.min,
+        type: 'number',
+        //width:60
+      },
+      { field:'company',
+        displayName:'公司',
+        footerCellTemplate: '<div class="ui-grid-cell-contents" style="background-color:#ff4949;color: White">custom template</div>',
+        //width:100
+      },
+      { name: 'edit', 
+        displayName: '兴趣爱好', 
+        cellTemplate: '<button type="button" class="btn btn-primary btn-sm" ng-click="grid.appScope.edit(row.entity)" >点击看到我的兴趣吧</button>',
+        enableCellEdit:false,
+        enableFiltering: false,
+        //width:150
+      },
+      {
+        field:'master',
+        displayName:'学历',
+        filter: {
+          type: uiGridConstants.filter.SELECT,
+          selectOptions: [ { value: '本科', label: '本科' }, { value: '研究生', label: '研究生' },{ value: '大专', label: '大专' },{ value: '博士', label: '博士' }]
+        },
+        //width:150
+      },
+      {
+        field:'Tag',
+        displayName:'是否录用',
+        //width:100,
+        enableFiltering: false,
+        cellTemplate:'<div class="cellClass" ng-click="row.entity.tag=!row.entity.tag" ng-class="{\'cellInfo\':row.entity.tag,\'cellRed\':!row.entity.tag}"><span ng-if=row.entity.tag>录用</span><span ng-if=!row.entity.tag>不录用</span></div>'
       }
     ] 
   };
   $scope.edit=function(val){
-    alert(val.id)
+    alert(val.name  + ' 的爱好是：'+val.hobby)
   };
   $scope.getGridData=function(){
      $http({

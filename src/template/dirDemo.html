@@ -9,7 +9,10 @@
 .ui-grid-pager-control .ui-grid-pager-max-pages-number{vertical-align: baseline;position: relative;top:3px;}
 </style>
 	<h3>ui-grid组件</h3>
-	<div class="gridStyle" ui-grid="gridOptions1" ui-grid-pagination ui-grid-edit ui-grid-selection ui-grid-move-columns ui-grid-autoResize ui-grid-resizeColumns></div>
+	<div style="margin:10px 0;">
+		<button class="btn btn-success" style="margin-bottom:15px;" ng-click="getSelectData()">录用选中人员</button>
+	</div>
+	<div class="gridStyle" ui-grid="gridOptions1" ui-grid-pagination ui-grid-edit ui-grid-selection ui-grid-move-columns ui-grid-resizeColumns ui-grid-resize-columns ui-grid-pinning ui-grid-auto-resize></div>
 	<hr/>
     <h3>提示组件</h3>
     <button type="button" class="btn btn-success" ng-click="showNotice({text:'我是成功的信息',type:'success'})">（成功）Success</button>
