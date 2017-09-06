@@ -19,6 +19,13 @@
 * ng-echarts:https://github.com/liekkas/ng-echarts
 * ui-grid: http://ui-grid.info/docs (棒棒的！)
 # AngualrJs组件使用说明
+## ui-grid  
+下载依赖<br/>
+`npm install angular-ui-grid`
+引入文件
+`<link rel="stylesheet" type="text/css" href="node_modules/angular-ui-grid/ui-grid.min.css" />`
+`<script src="node_modules/angular-ui-grid/ui-grid.min.js"></script>`
+
 ## nl-echarts  echarts组件
 引入相关文件
 ``` html
