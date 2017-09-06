@@ -5,9 +5,11 @@
 .chartItem{padding:0 5px;}
 .chartHead{padding-left:15px;color:#fff;height:40px;line-height:40px;background-color: #7ec2f3;}
 .chartBody{height:320px;width: 100%;}
+.ui-grid-pager-control input{width: 67px;}
+.ui-grid-pager-control .ui-grid-pager-max-pages-number{vertical-align: baseline;position: relative;top:3px;}
 </style>
 	<h3>ui-grid组件</h3>
-	<div class="gridStyle" ui-grid="gridOptions1" ui-grid-pagination ui-grid-edit ui-grid-selection></div>
+	<div class="gridStyle" ui-grid="gridOptions1" ui-grid-pagination ui-grid-edit ui-grid-selection ui-grid-move-columns ui-grid-autoResize ui-grid-resizeColumns></div>
 	<hr/>
     <h3>提示组件</h3>
     <button type="button" class="btn btn-success" ng-click="showNotice({text:'我是成功的信息',type:'success'})">（成功）Success</button>
